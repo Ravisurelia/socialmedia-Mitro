@@ -2,12 +2,25 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Welcome from "./Welcome";
 
-const elements = <Welcome />;
-ReactDOM.render(
+/* const elements = <Welcome />; */
+let elem;
+
+if (location.pathname === "/welcome") {
+    // runs if user is NOT logged in
+    elem = <Welcome />;
+} else {
+    // runs if the user IS logged in
+    elem = <img src="/my-logo.jpg" />;
+}
+ReactDOM.render(elem, document.querySelector("main"));
+/* ReactDOM.render(
     //this is my react component
     elements, // here is says create a hello world component
-    document.querySelector("main")
-);
+    document.querySelector("main") 
+
+   
+
+); */
 /* 
 function HelloWorld() {
     //this is my definition of my component hello world

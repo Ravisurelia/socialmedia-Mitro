@@ -1,18 +1,44 @@
 import React from "react";
-/* export default class MyReact extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {};
-    }
 
-    render(props) {
+export default class Registration extends React.Component {
+    render() {
         return (
-            <strong>
-                {props.name}
-                {props.name == "React" && <h1>!!!!</h1>}
-            </strong>
-            //if you change the name then !!! marks will not show up
-            //this is called conditional rendering
+            <div>
+                <p id="registration">Please insert your details here!</p>,
+                <form method="POST">
+                    <input
+                        type="text"
+                        className="userinput"
+                        name="firstname"
+                        placeholder="First Name"
+                    />
+                    <input
+                        type="text"
+                        className="userinput"
+                        name="lastname"
+                        placeholder="Last Name"
+                    />
+                    <input
+                        type="text"
+                        className="email"
+                        name="email"
+                        placeholder="email"
+                    />
+                    <input
+                        type="password"
+                        className="password"
+                        name="password"
+                        placeholder="password"
+                    />
+                    <input type="hidden" name="_csrf" value="{{csrfToken}}" />
+
+                    <button className="regibtn">Submit</button>
+
+                    <a className="loginpage" href="./login">
+                        If you have already register. Login Here!
+                    </a>
+                </form>
+            </div>
         );
     }
-} */
+}

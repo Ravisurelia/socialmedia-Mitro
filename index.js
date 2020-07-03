@@ -31,6 +31,8 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use(express.static(__dirname + "/public"));
+
 if (process.env.NODE_ENV != "production") {
     app.use(
         "/bundle.js",
@@ -43,6 +45,10 @@ if (process.env.NODE_ENV != "production") {
 }
 
 //==============================middleware=====================================================================//
+
+app.get("/welcome", (req, res) => {
+    res.sendFile(__dirname + "/index.html");
+});
 
 app.get("*", function (req, res) {
     res.sendFile(__dirname + "/index.html");
