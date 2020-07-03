@@ -1,5 +1,5 @@
 import React from "react";
-export default class MyReact extends React.Component {
+/* export default class MyReact extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
@@ -15,4 +15,4 @@ export default class MyReact extends React.Component {
             //this is called conditional rendering
         );
     }
-}
+} */

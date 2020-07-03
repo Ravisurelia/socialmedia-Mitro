@@ -1,13 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import Welcome from "./Welcome";
 
-const elements = <HelloWorld />;
+const elements = <Welcome />;
 ReactDOM.render(
     //this is my react component
     elements, // here is says create a hello world component
     document.querySelector("main")
 );
-
+/* 
 function HelloWorld() {
     //this is my definition of my component hello world
     //here we can use the class but for a moment we will use function
@@ -35,4 +36,4 @@ function MyReact(props) {
         //if you change the name then !!! marks will not show up
         //this is called conditional rendering
     );
-}
+} */
