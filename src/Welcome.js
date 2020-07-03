@@ -2,24 +2,13 @@ import React from "react";
 /* import MyReact from "./registration"; */
 import Registration from "./registration";
 
-
-export default function Welcome(props) {
-/*     constructor(props) {
-        super(props);
-        this.state = {};
-    }
-    handleChange(e) {
-        this.setState({
-            name: e.target.value
-        })
-    } */
-    render() {
-        return (
+export default function Welcome() {
+    return (
+        <div>
+            <h1>Hello, Welcome to Mitro!!!</h1>
             <div>
-                <h1>Hello, This is new React project!!!</h1>
                 <Registration />
             </div>
-            
-        );
-    };
+        </div>
+    );
 }
