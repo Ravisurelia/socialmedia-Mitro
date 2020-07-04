@@ -8,9 +8,9 @@ export default function Welcome() {
             <h1 className="welcome_message">- - Mitro - -</h1>
             <h2 className="slogan">Friends are Sunshine</h2>
             <img src="main_logo.png" className="main_logo"></img>
-            <div>
+            <section>
                 <Registration />
-            </div>
+            </section>
         </div>
     );
 }

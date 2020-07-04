@@ -14,8 +14,8 @@
 }
 
 .main_logo {
-    width: 700px;
-    height: 300px;
+    width: 600px;
+    height: 250px;
     margin-top: -15px;
     z-index: 1;
 }
@@ -44,13 +44,63 @@
     align-items: center;
     text-decoration: none;
     text-align: center;
+    margin-top: 15px;
+    border: 2px solid lightskyblue;
+    border-radius: 20px;
+    padding: 20px;
+    background-color: lightslategray;
+}
+#insert_details {
+    font-size: 20px;
+    font-family: sans-serif;
+    font-weight: lighter;
+    letter-spacing: 2px;
 }
 
-.regi_form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
+input {
+    width: 250px;
+    height: 40px;
+    margin: 5px;
     text-align: center;
+    border-radius: 20px;
+    font-weight: lighter;
+    font-family: sans-serif;
+    font-size: 18px;
+    letter-spacing: 2px;
+}
+.submit_btn {
+    width: 150px;
+    height: 50px;
+    margin-top: 10px;
+    border-radius: 25px;
+    font-size: 25px;
+    font-weight: lighter;
+}
+.submit_btn:hover {
+    background-color: black;
+    color: white;
+}
+.login_page {
+    margin-top: 20px;
+    font-size: 20px;
+    font-family: sans-serif;
+    font-weight: lighter;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+footer {
+    height: 20px;
+    font-family: sans-serif;
+    font-weight: lighter;
+    color: rgb(119, 119, 119);
+    margin-bottom: 5px;
+    text-align: center;
+    position: relative;
+    bottom: 5px;
+    width: 100%;
+    font-size: 20px;
+    margin-top: 10px;
+}
+.info {
+    padding: 10px;
 }

@@ -10,7 +10,7 @@ if (location.pathname === "/welcome") {
     elem = <Welcome />;
 } else {
     // runs if the user IS logged in
-    elem = <img src="/my-logo.jpg" />;
+    elem = <img src="/main_logo.png" className="main_logo" />;
 }
 ReactDOM.render(elem, document.querySelector("main"));
 /* ReactDOM.render(

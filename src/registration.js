@@ -46,9 +46,9 @@ export default class Registration extends React.Component {
 
     render() {
         return (
-            <div className="registration_form">
-                <p id="insert_details">Please insert your details here!</p>
-                <form method="POST" className="regi_form">
+            <div className="info">
+                <p id="insert_details">Sign up!</p>
+                <form method="POST" className="registration_form">
                     <input
                         type="text"
                         className="userinput"
@@ -83,16 +83,15 @@ export default class Registration extends React.Component {
                     />
 
                     <button
-                        className="regibtn"
+                        className="submit_btn"
                         onClick={(e) => this.handleSubmit(e)}
                     >
                         Submit
                     </button>
-
-                    <a className="loginpage" href="./login">
-                        If you have already register. Login Here!
-                    </a>
                 </form>
+                <a className="login_page" href="./login">
+                    If you have already register. Login Here!
+                </a>
                 {this.state.error && (
                     <div className="error">ALL FIELDS ARE REQUIRED!!</div>
                 )}
