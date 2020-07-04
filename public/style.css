@@ -1,3 +1,56 @@
 * {
     background-color: #ffffff;
+    margin: 0px;
+    padding: 0px;
+}
+
+.welcome_main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    text-align: center;
+}
+
+.main_logo {
+    width: 700px;
+    height: 300px;
+    margin-top: -15px;
+    z-index: 1;
+}
+
+.welcome_message {
+    font-size: 50px;
+    font-family: sans-serif;
+    font-weight: lighter;
+    letter-spacing: 2px;
+    margin-top: 10px;
+}
+
+.slogan {
+    font-size: 30px;
+    font-family: sans-serif;
+    font-weight: lighter;
+    letter-spacing: 3px;
+    margin-top: 10px;
+    z-index: 2;
+}
+
+.registration_form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    text-align: center;
+}
+
+.regi_form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    text-align: center;
 }
