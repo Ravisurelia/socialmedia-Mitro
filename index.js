@@ -103,7 +103,7 @@ app.post("/registration", (req, res) => {
                 console.log("my post register error2: ", err);
             });
     } else {
-        res.json();
+        res.json(err);
     }
 });
 

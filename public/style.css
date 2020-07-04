@@ -104,3 +104,10 @@ footer {
 .info {
     padding: 10px;
 }
+
+.error {
+    font-size: 18px;
+    font-family: sans-serif;
+    font-weight: lighter;
+    color: red;
+}

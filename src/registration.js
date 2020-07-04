@@ -38,7 +38,7 @@ export default class Registration extends React.Component {
             })
             .catch((err) => {
                 console.log("my err in axios: ", err);
-                this.state({
+                this.setState({
                     error: true,
                 });
             });
@@ -47,6 +47,9 @@ export default class Registration extends React.Component {
     render() {
         return (
             <div className="info">
+                {this.state.error && (
+                    <div className="error">ALL FIELDS ARE REQUIRED!!</div>
+                )}
                 <p id="insert_details">Sign up!</p>
                 <form method="POST" className="registration_form">
                     <input
@@ -92,9 +95,6 @@ export default class Registration extends React.Component {
                 <a className="login_page" href="./login">
                     If you have already register. Login Here!
                 </a>
-                {this.state.error && (
-                    <div className="error">ALL FIELDS ARE REQUIRED!!</div>
-                )}
             </div>
         );
     }
