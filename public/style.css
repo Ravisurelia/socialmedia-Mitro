@@ -6,6 +6,15 @@
 
 .welcome_main {
     display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    text-align: center;
+}
+
+.welcome_info {
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -21,11 +30,11 @@
 }
 
 .welcome_message {
-    font-size: 50px;
-    font-family: sans-serif;
+    font-size: 60px;
+    font-family: "Bungee Inline", cursive;
     font-weight: lighter;
     letter-spacing: 2px;
-    margin-top: 10px;
+    padding: 0;
 }
 
 .slogan {
@@ -33,7 +42,7 @@
     font-family: sans-serif;
     font-weight: lighter;
     letter-spacing: 3px;
-    margin-top: 10px;
+    margin-top: -30px;
     z-index: 2;
 }
 
@@ -51,10 +60,11 @@
     background-color: lightslategray;
 }
 #insert_details {
-    font-size: 20px;
+    font-size: 25px;
     font-family: sans-serif;
     font-weight: lighter;
     letter-spacing: 2px;
+    margin-top: 20px;
 }
 
 input {
@@ -95,7 +105,7 @@ footer {
     color: rgb(119, 119, 119);
     margin-bottom: 5px;
     text-align: center;
-    position: relative;
+    position: fixed;
     bottom: 5px;
     width: 100%;
     font-size: 20px;
@@ -103,6 +113,7 @@ footer {
 }
 .info {
     padding: 10px;
+    margin-top: 50px;
 }
 
 .error {
