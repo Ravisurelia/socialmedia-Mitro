@@ -27,7 +27,7 @@ export default class Registration extends React.Component {
         e.preventDefault();
 
         axios
-            .post("/registration", {
+            .post("/login", {
                 email: this.state.email,
                 password: this.state.password,
             })
@@ -80,7 +80,7 @@ export default class Registration extends React.Component {
                 </form>
                 <div className="login_page">
                     If you have not register yet!
-                    <Link to="/welcome" className="login_page">
+                    <Link to="/" className="login_page">
                         Register Here!
                     </Link>
                 </div>

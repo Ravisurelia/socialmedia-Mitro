@@ -138,7 +138,7 @@ app.post("/login", (req, res) => {
                         req.session.userId = results.rows[0].id;
 
                         if (!results.rows[0]) {
-                            res.json("success");
+                            res.json();
                         } else {
                             res.json("Login Successful");
                         }
