@@ -16,3 +16,8 @@ exports.addingUsers = (firstname, lastname, email, password) => {
         [firstname, lastname, email, password]
     );
 };
+
+exports.gettingPassword = (email) => {
+    //password and id to email
+    return db.query("SELECT password, id FROM users WHERE email = $1", [email]);
+};

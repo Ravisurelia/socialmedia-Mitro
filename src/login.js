@@ -2,17 +2,17 @@ import React from "react";
 //import axios from "axios";
 import { Link } from "react-router-dom";
 import axios from "./axios";
+
 export default class Registration extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            firstname: "",
-            lastname: "",
             email: "",
             password: "",
             error: false,
         };
     }
+
     handleChange(e) {
         let name = e.target.name;
         let val = e.target.value;
@@ -28,8 +28,6 @@ export default class Registration extends React.Component {
 
         axios
             .post("/registration", {
-                firstname: this.state.firstname,
-                lastname: this.state.lastname,
                 email: this.state.email,
                 password: this.state.password,
             })
@@ -49,26 +47,13 @@ export default class Registration extends React.Component {
         return (
             <div className="info">
                 {this.state.error && (
-                    <div className="error">ALL FIELDS ARE REQUIRED!!</div>
+                    <div className="error">
+                        Upps.....Email or password did not match. Have you
+                        registered already?
+                    </div>
                 )}
                 <p id="insert_details">Sign up!</p>
                 <form method="POST" className="registration_form">
-                    <input
-                        type="text"
-                        className="userinput"
-                        name="firstname"
-                        placeholder="First Name"
-                        value={this.state.value}
-                        onChange={(e) => this.handleChange(e)}
-                    />
-                    <input
-                        type="text"
-                        className="userinput"
-                        name="lastname"
-                        placeholder="Last Name"
-                        value={this.state.value}
-                        onChange={(e) => this.handleChange(e)}
-                    />
                     <input
                         type="text"
                         className="email"
@@ -94,9 +79,9 @@ export default class Registration extends React.Component {
                     </button>
                 </form>
                 <div className="login_page">
-                    If you have already register!
-                    <Link to="/login" className="login_page">
-                        Login Here!
+                    If you have not register yet!
+                    <Link to="/welcome" className="login_page">
+                        Register Here!
                     </Link>
                 </div>
             </div>

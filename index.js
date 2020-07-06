@@ -2,9 +2,9 @@ const express = require("express");
 const app = express();
 const compression = require("compression");
 const cookieSession = require("cookie-session");
-/* const csurf = require("csurf"); */
+const csurf = require("csurf");
 const { hash, compare } = require("./bc.js");
-const { addingUsers } = require("./db.js");
+const { addingUsers, gettingPassword } = require("./db.js");
 
 //==============================middleware=====================================================================//
 
@@ -33,6 +33,13 @@ app.use((req, res, next) => {
     res.locals.csrfToken = req.csrfToken(); //////for csurf
     next();
 }); */
+
+app.use(csurf());
+
+app.use(function (req, res, next) {
+    res.cookie("mytoken", req.csrfToken());
+    next();
+});
 
 if (process.env.NODE_ENV != "production") {
     app.use(
@@ -96,7 +103,7 @@ app.post("/registration", (req, res) => {
                     })
                     .catch((err) => {
                         console.log("my post register error: ", err);
-                        req.json();
+                        res.json();
                     });
             })
             .catch((err) => {
@@ -105,6 +112,68 @@ app.post("/registration", (req, res) => {
     } else {
         res.json(err);
     }
+});
+
+app.get("/login", (req, res) => {
+    if (!req.session.userId) {
+        res.redirect("/registration");
+    } else {
+        res.sendFile(__dirname + "/index.html");
+    }
+});
+
+app.post("/login", (req, res) => {
+    console.log("this is my req.body in post login: ", req.body);
+    console.log("this is my req.session in post login: ", req.session.userId);
+    //here we are getting the password from the register page and matching it here to see if it is the same
+    gettingPassword(req.body.email)
+        .then((results) => {
+            /*  console.log("my login results: ", results);
+            console.log("req.body.email in login : ", req.body.email);
+            console.log("this is my 0 pass: ", results.rows[0].password);
+            console.log("req.body.password in login: ", req.body.password); */
+            compare(req.body.password, results.rows[0].password)
+                .then((match) => {
+                    if (match) {
+                        req.session.userId = results.rows[0].id;
+
+                        if (!results.rows[0]) {
+                            res.json("success");
+                        } else {
+                            res.json("Login Successful");
+                        }
+                        /* signedUserId(req.session.userId)
+                            .then((results) => {
+                                console.log("my login results 2: ", results);
+                                if (!results.rows[0]) {
+                                    res.redirect("/petition");
+                                } else {
+                                    res.redirect("/thankyou");
+                                }
+                            })
+                            .catch((err) => {
+                                console.log(
+                                    "my post register signedUserId error: ",
+                                    err
+                                );
+                                res.redirect("/petition");
+                            }); */
+                    } else {
+                        console.log("it is not equal: ", match);
+                        res.json();
+                    }
+                })
+                .catch((err) => {
+                    console.log("my post login error: ", err);
+                    res.json();
+                });
+        })
+        .catch((err) => {
+            console.log("my post login error 2: ", err);
+            res.json();
+        });
+
+    //res.end();
 });
 
 app.listen(8080, function () {

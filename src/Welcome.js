@@ -1,6 +1,9 @@
 import React from "react";
 /* import MyReact from "./registration"; */
 import Registration from "./registration";
+import axios from "./axios";
+import { HashRouter, Route } from "react-router-dom";
+import Login from "./login";
 
 export default function Welcome() {
     return (
@@ -11,9 +14,13 @@ export default function Welcome() {
                 <img src="main_logo.png" className="main_logo"></img>
             </div>
 
-            <section>
-                <Registration />
-            </section>
+            {/* <section><Registration /></section> */}
+            <HashRouter>
+                <div>
+                    <Route exact path="/" component={Registration} />
+                    <Route path="/login" component={Login} />
+                </div>
+            </HashRouter>
         </div>
     );
 }
