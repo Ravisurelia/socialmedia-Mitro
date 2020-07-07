@@ -70,14 +70,6 @@ app.get("/welcome", (req, res) => {
     }
 });
 
-app.get("*", function (req, res) {
-    if (!req.session.userId) {
-        res.redirect("/welcome");
-    } else {
-        res.sendFile(__dirname + "/index.html");
-    }
-});
-
 app.post("/registration", (req, res) => {
     if (
         req.body.firstname != "" &&
@@ -250,6 +242,14 @@ app.post("/password/reset/verify", (req, res) => {
         .catch((err) => {
             console.log("NOTHING HAPPENED IN CHECKING CODE: ", err);
         });
+});
+
+app.get("*", function (req, res) {
+    if (!req.session.userId) {
+        res.redirect("/welcome");
+    } else {
+        res.sendFile(__dirname + "/index.html");
+    }
 });
 
 app.listen(8080, function () {
