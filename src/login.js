@@ -86,7 +86,7 @@ export default class Registration extends React.Component {
                 </div>
                 <div className="reset_pass">
                     forgot your password?
-                    <Link to="/password/reset/start" className="reset_pass1">
+                    <Link to="/resetpass" className="reset_pass1">
                         Reset Here!
                     </Link>
                 </div>

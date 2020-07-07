@@ -176,7 +176,7 @@ app.post("/login", (req, res) => {
     //res.end();
 });
 
-app.post("//password/reset/start", (req, res) => {
+app.post("/password/reset/start", (req, res) => {
     gettingPassword(req.body.email)
         .then((results) => {
             if (results.rows[0]) {
@@ -207,20 +207,22 @@ app.post("//password/reset/start", (req, res) => {
 app.post("/password/reset/verify", (req, res) => {
     checkingCode(req.body.email)
         .then((results) => {
-            console.log(
+            /*  console.log(
                 "my login results in /password/reset/verify: ",
                 results
             );
             console.log(
                 "req.body.email in /password/reset/verify:",
                 req.body.email
-            );
+            ); */
+            console.log("my body.code ", req.body.code);
             console.log("this is my 0 row: ", results.rows[0]);
-            if (req.body.code === results.rows[0].code) {
-                hash(req.body.newPassword)
-                    .then((hashedPass) => {
-                        console.log("my hashedPass: ", hashedPass);
-                        updatingPassword(req.body.email, hashedPass)
+
+            if (results.rows[0]) {
+                hash(req.body.password)
+                    .then((hashedPassword) => {
+                        console.log("my hashedPass: ", hashedPassword);
+                        updatingPassword(req.body.email, hashedPassword)
                             .then(() => {
                                 console.log(
                                     "req.body in /password/reset/verify  : ",
