@@ -11,8 +11,8 @@ export default class ResetPassword extends React.Component {
             code: "",
             password: "",
             emailsubmitted: true,
-            codesubmitted: true,
-            successfulreset: true,
+            codesubmitted: false,
+            successfulreset: false,
             error: undefined,
         };
     }
@@ -30,7 +30,7 @@ export default class ResetPassword extends React.Component {
         e.preventDefault();
 
         if (this.state.emailsubmitted) {
-            axios
+            return axios
                 .post("/password/reset/start", {
                     email: this.state.email,
                 })
@@ -43,13 +43,13 @@ export default class ResetPassword extends React.Component {
                 })
                 .catch((err) => {
                     console.log("my err in axios emailsubmitted: ", err);
-                    this.setState({
+                    return this.setState({
                         error:
                             "Sorry! something went wrong. Please check if you have provided correct email!",
                     });
                 });
         } else if (this.state.codesubmitted) {
-            axios
+            return axios
                 .post("/password/reset/verify", {
                     code: this.state.code,
                     email: this.state.email,
@@ -64,7 +64,7 @@ export default class ResetPassword extends React.Component {
                 })
                 .catch((err) => {
                     console.log("my err in axios codesubmitted: ", err);
-                    this.setState({
+                    return this.setState({
                         error:
                             "The code you have entered doesn't match! Please re-enter the code again or ask for a new code.",
                     });
@@ -72,16 +72,16 @@ export default class ResetPassword extends React.Component {
         }
     }
 
-    render() {
-        return (
-            <div className="info">
-                {this.state.error && (
-                    <div className="error">(this.state.error)</div>
-                )}
+    getCurrentDisplay() {
+        {
+            this.state.error && <div className="error">(this.state.error)</div>;
+        }
 
-                <p id="insert_details">Please insert your registered email!</p>
+        <p id="insert_details">Please insert your registered email!</p>;
 
-                {this.state.emailsubmitted && (
+        {
+            this.state.emailsubmitted && (
+                <div className="emailsubmit">
                     <form method="POST" className="registration_form">
                         <input
                             type="text"
@@ -90,6 +90,7 @@ export default class ResetPassword extends React.Component {
                             placeholder="email"
                             value={this.state.value}
                             onChange={(e) => this.handleChange(e)}
+                            required
                         />
 
                         <button
@@ -99,52 +100,60 @@ export default class ResetPassword extends React.Component {
                             Submit
                         </button>
                     </form>
-                )}
+                </div>
+            );
+        }
 
-                {this.state.codesubmitted && (
-                    <div className="code_submit">
-                        <p id="insert_details">
-                            Please insert the code that has been sent to your
-                            email!
-                        </p>
-                        <form method="POST" className="registration_form">
-                            <input
-                                type="text"
-                                className="code"
-                                name="code"
-                                placeholder="code"
-                                value={this.state.value}
-                                onChange={(e) => this.handleChange(e)}
-                            />
-                            <input
-                                type="text"
-                                className="password"
-                                name="newPassword"
-                                placeholder="New Password"
-                                value={this.state.value}
-                                onChange={(e) => this.handleChange(e)}
-                            />
+        {
+            this.state.codesubmitted && (
+                <div className="code_submit">
+                    <p id="insert_details">
+                        Please insert the code that has been sent to your email!
+                    </p>
+                    <form method="POST" className="registration_form">
+                        <input
+                            type="text"
+                            className="code"
+                            name="code"
+                            placeholder="code"
+                            value={this.state.value}
+                            onChange={(e) => this.handleChange(e)}
+                            required
+                        />
+                        <input
+                            type="text"
+                            className="password"
+                            name="newPassword"
+                            placeholder="New Password"
+                            value={this.state.value}
+                            onChange={(e) => this.handleChange(e)}
+                            required
+                        />
 
-                            <button
-                                className="submit_btn"
-                                onClick={(e) => this.handleSubmit(e)}
-                            >
-                                Submit
-                            </button>
-                        </form>
-                    </div>
-                )}
-                {this.state.emailsubmitted && (
-                    <div className="login_page">
-                        <p id="insert_details">
-                            Password has been successfully updated.
-                        </p>
-                        <Link to="/login" className="login_page1">
-                            Login Here!
-                        </Link>
-                    </div>
-                )}
-            </div>
-        );
+                        <button
+                            className="submit_btn"
+                            onClick={(e) => this.handleSubmit(e)}
+                        >
+                            Submit
+                        </button>
+                    </form>
+                </div>
+            );
+        }
+        {
+            this.state.successfulreset && (
+                <div className="login_page">
+                    <p id="insert_details">
+                        Password has been successfully updated.
+                    </p>
+                    <Link to="/login" className="login_page1">
+                        Login Here!
+                    </Link>
+                </div>
+            );
+        }
+    }
+    render() {
+        return <div className="info">{this.getCurrentDisplay()}</div>;
     }
 }
