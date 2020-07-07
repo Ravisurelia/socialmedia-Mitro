@@ -98,6 +98,27 @@ input {
     letter-spacing: 2px;
     margin-bottom: 10px;
 }
+.login_page1 {
+    text-decoration: none;
+}
+.login_page1:hover {
+    color: tomato;
+}
+
+.reset_pass1 {
+    text-decoration: none;
+}
+.reset_pass1:hover {
+    color: tomato;
+}
+.reset_pass {
+    margin-top: 20px;
+    font-size: 20px;
+    font-family: sans-serif;
+    font-weight: lighter;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
 footer {
     height: 20px;
     font-family: sans-serif;

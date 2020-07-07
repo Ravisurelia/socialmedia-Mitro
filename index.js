@@ -4,7 +4,15 @@ const compression = require("compression");
 const cookieSession = require("cookie-session");
 const csurf = require("csurf");
 const { hash, compare } = require("./bc.js");
-const { addingUsers, gettingPassword } = require("./db.js");
+const {
+    addingUsers,
+    gettingPassword,
+    insertingCode,
+    checkingCode,
+    updatingPassword,
+} = require("./db.js");
+const cryptoRandomString = require("crypto-random-string");
+const { sendEmail } = require("./ses");
 
 //==============================middleware=====================================================================//
 
@@ -64,7 +72,7 @@ app.get("/welcome", (req, res) => {
 
 app.get("*", function (req, res) {
     if (!req.session.userId) {
-        res.redirect("/Welcome");
+        res.redirect("/welcome");
     } else {
         res.sendFile(__dirname + "/index.html");
     }
@@ -174,6 +182,74 @@ app.post("/login", (req, res) => {
         });
 
     //res.end();
+});
+
+app.post("//password/reset/start", (req, res) => {
+    gettingPassword(req.body.email)
+        .then((results) => {
+            if (results.rows[0]) {
+                const secretCode = cryptoRandomString({
+                    length: 6,
+                });
+                insertingCode(req.body.email, secretCode)
+                    .then(() => {
+                        sendEmail(
+                            req.body.email,
+                            "Email for resetting your password.",
+                            `Here is the secret code that will allow you to reset your password: ${secretCode}`
+                        );
+                        res.json();
+                    })
+                    .catch((err) => {
+                        console.log("NO SUCH CODE: ", err);
+                    });
+            } else {
+                res.sendStatus(500);
+            }
+        })
+        .catch((err) => {
+            console.log("NOTHING FOUND: ", err);
+        });
+});
+
+app.post("/password/reset/verify", (req, res) => {
+    checkingCode(req.body.email)
+        .then((results) => {
+            console.log(
+                "my login results in /password/reset/verify: ",
+                results
+            );
+            console.log(
+                "req.body.email in /password/reset/verify:",
+                req.body.email
+            );
+            console.log("this is my 0 row: ", results.rows[0]);
+            if (req.body.code === results.rows[0].code) {
+                hash(req.body.newPassword)
+                    .then((hashedPass) => {
+                        console.log("my hashedPass: ", hashedPass);
+                        updatingPassword(req.body.email, hashedPass)
+                            .then(() => {
+                                console.log(
+                                    "req.body in /password/reset/verify  : ",
+                                    req.body
+                                );
+                                res.json();
+                            })
+                            .catch((err) => {
+                                console.log("NO UPDATE: ", err);
+                            });
+                    })
+                    .catch((err) => {
+                        console.log("NO HASHING: ", err);
+                    });
+            } else {
+                console.log("NOTHING HAPPENED IN WHOLE HASHING");
+            }
+        })
+        .catch((err) => {
+            console.log("NOTHING HAPPENED IN CHECKING CODE: ", err);
+        });
 });
 
 app.listen(8080, function () {

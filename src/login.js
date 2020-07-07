@@ -80,8 +80,14 @@ export default class Registration extends React.Component {
                 </form>
                 <div className="login_page">
                     If you have not register yet!
-                    <Link to="/" className="login_page">
+                    <Link to="/" className="login_page1">
                         Register Here!
+                    </Link>
+                </div>
+                <div className="reset_pass">
+                    forgot your password?
+                    <Link to="/password/reset/start" className="reset_pass1">
+                        Reset Here!
                     </Link>
                 </div>
             </div>
