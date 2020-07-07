@@ -79,10 +79,11 @@ export default class ResetPassword extends React.Component {
                     <div className="error">{this.state.error}</div>
                 )}
 
-                <p id="insert_details">Please insert your registered email!</p>
-
                 {this.state.emailSubmitted && (
                     <div className="emailsubmit">
+                        <p id="insert_details">
+                            Please insert your registered email!
+                        </p>
                         <form method="POST" className="registration_form">
                             <input
                                 type="text"
