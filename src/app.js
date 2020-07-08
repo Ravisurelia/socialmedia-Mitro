@@ -2,6 +2,7 @@ import React from "react";
 import axios from "./axios";
 import ProfilePic from "./profilepic";
 import Uploader from "./uploader";
+import Profile from "./profile";
 
 export default class App extends React.Component {
     constructor() {
@@ -13,24 +14,24 @@ export default class App extends React.Component {
         this.setImage = this.setImage.bind(this);
         this.componentDidMount = this.componentDidMount.bind(this);
         this.closeModal = this.closeModal.bind(this);
+
+        /*  this.setBio = this.setBio.bind(this); */
     }
 
     //lifecycle methods
     componentDidMount() {
-        // console.log("component did mount");
-        //make axios req to server to get the information about the users (first, last , profile picture)
-        //modify the users table to have a column for profile picture.
-        //we are going to store the response we got from server in state
-        //get a point where you can log this.state and see the first last and profile pic.
         axios.get("/user").then((res) => {
             console.log("getting my res from get users: ", res);
-            if (res.data.ProfilePic === undefined) {
-                res.data.ProfilePic = "/default_image.png";
+            let image;
+            if (!res.data.imgurl) {
+                image = "/default_image.png";
+            } else {
+                image = res.data.imgurl;
             }
             this.setState({
-                firstname: res.data.firstname,
-                lastname: res.data.lastname,
-                ProfilePic: res.data.ProfilePic,
+                firstname: res.data.first,
+                lastname: res.data.last,
+                ProfilePic: image,
             });
         });
     }
@@ -53,17 +54,30 @@ export default class App extends React.Component {
             ProfilePic: newProfilePic,
         });
     }
+
+    /*   setBio(newBio) {
+        this.setState({
+            bio: newBio,
+        });
+    } */
     render() {
-        console.log("this is my state: ", this.state);
+        /* console.log("this is my state: ", this.state);
         console.log("this is my first:", this.state.first);
         console.log("this is my last:", this.state.last);
-        console.log("this is my ProfilePic:", this.state.ProfilePic);
+        console.log("this is my ProfilePic:", this.state.ProfilePic); */
 
         return (
             <div className="profile_picture">
-                <h2 className="image_header">
-                    Please upload your profile image.
-                </h2>
+                <h3 className="image_header">
+                    Please upload your profile Picture!
+                </h3>
+
+                {/*  <Profile
+                    firstname={this.state.firstname}
+                    lastname={this.state.lastname}
+                    ProfilePic={this.state.ProfilePic}
+                /> */}
+
                 <ProfilePic
                     firstname={this.state.firstname}
                     lastname={this.state.lastname}

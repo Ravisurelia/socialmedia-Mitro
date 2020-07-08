@@ -8,6 +8,9 @@ export default class Uploader extends React.Component {
             file: null,
             error: false,
         };
+        this.handleChange = this.handleChange.bind(this);
+        this.errorMessage = this.errorMessage.bind(this);
+        this.uploadImage = this.uploadImage.bind(this);
     }
 
     handleChange(e) {
@@ -21,12 +24,7 @@ export default class Uploader extends React.Component {
             error: false,
         });
     }
-    //when the user selects an image
-    //store that image in state
-    //you need to put the code from imageboard to here
-    //store the file in FromData
-    //Once the file is in form data we can send file off to server
-    //we want user to see the image without refreshing the page
+
     uploadImage(e) {
         e.preventDefault();
         var formData = new FormData();
@@ -36,7 +34,7 @@ export default class Uploader extends React.Component {
             .post("/upload", formData)
             .then((results) => {
                 console.log("results in my post upload in uploader: ", results);
-                this.props.setImage(results.data.imgUrl);
+                this.props.setImage(results.data.imgurl);
                 this.props.closeModal();
             })
             .catch((err) => {
@@ -45,8 +43,10 @@ export default class Uploader extends React.Component {
     }
 
     render() {
+        console.log("THIIIIIISSSS: ", this);
+
         return (
-            <div>
+            <div className="uploader_area">
                 {this.state.error && (
                     <p className="para">
                         Profile picture is mandatory for identification!
@@ -57,17 +57,20 @@ export default class Uploader extends React.Component {
                         X
                     </p>
                 </div>
-                <div>
-                    <h3>Please upload your picture here!</h3>
-                    <form className="modal-form">
+                <div className="main_modal">
+                    <h3 className="image_header">
+                        Please upload your picture here!
+                    </h3>
+                    <form className="modal-form" onSubmit={this.uploadImage}>
                         <input
+                            className="image_file"
                             type="file"
                             name="file"
                             accept="image/*"
                             onChange={this.handleChange}
-                            onFocus={this.resetError}
+                            onFocus={this.errorMessage}
                         />
-                        <button className="submit_btn">Submit</button>
+                        <button className="upload_btn">upload</button>
                     </form>
                 </div>
             </div>

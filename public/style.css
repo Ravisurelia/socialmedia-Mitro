@@ -152,9 +152,77 @@ footer {
     text-align: center;
 }
 
+.profile_picture {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
 .profile_image {
     width: 300px;
     height: 300px;
     border-radius: 150px;
     margin-top: 20px;
+    border: 5px solid lightseagreen;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.para {
+    font-size: 20px;
+    font-family: sans-serif;
+    font-weight: lighter;
+    margin-top: 30px;
+}
+.image_header {
+    font-size: 30px;
+    font-family: sans-serif;
+    font-weight: lighter;
+    margin-top: 40px;
+}
+.modal-form {
+    width: 600px;
+    height: 100px;
+    font-size: 20px;
+    font-family: sans-serif;
+    font-weight: lighter;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.image_file {
+    font-size: 20px;
+    font-family: sans-serif;
+    font-weight: lighter;
+    width: 400px;
+    height: 60px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 0px;
+}
+
+.upload_btn {
+    width: 100px;
+    height: 40px;
+    margin-top: 10px;
+    border-radius: 25px;
+    font-size: 20px;
+    font-weight: lighter;
+    cursor: pointer;
+}
+.upload_btn:hover {
+    background-color: black;
+    color: white;
+}
+
+.modal-X {
+    margin-top: 20px;
+    float: right;
+    cursor: pointer;
 }

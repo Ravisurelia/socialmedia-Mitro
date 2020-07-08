@@ -282,18 +282,14 @@ app.get("/user", (req, res) => {
     gettingUser(req.session.userId)
         .then((results) => {
             console.log("my result in index.js get users: ", results);
-            res.json({
-                firstname: results.rows[0].first,
-                lastname: results.rows[0].last,
-                profilePic: results.rows[0].imgUrl,
-            });
+            res.json(results.rows[0]);
         })
         .catch((err) => {
             console.log("NOTHING HAPPENED IN GETTING USER: ", err);
         });
 });
 
-app.get("/upload", uploader.single("file"), s3.upload, (req, res) => {
+app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
     console.log("file: ", req.file); //file we just uploaded
     console.log("input: ", req.body); //rest of the input field first, last
     const { filename } = req.file;
