@@ -7,7 +7,9 @@ CREATE TABLE users(
   first VARCHAR NOT NULL CHECK (first != ''),
   last VARCHAR NOT NULL CHECK (last != ''),
   email VARCHAR NOT NULL UNIQUE,
-  password VARCHAR NOT NULL
+  password VARCHAR NOT NULL,
+  imgurl VARCHAR,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE reset_codes(

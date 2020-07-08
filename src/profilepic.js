@@ -11,8 +11,10 @@ export default function ProfilePic(props) {
 
     return (
         <div>
-            <p>First, last</p>
-            <img src="" onClick={props.toggleModal} />
+            <p>
+                Name:{props.firstname} Last name: {props.lastname}
+            </p>
+            <img src={props.ProfilePic} onClick={props.openModal} />
         </div>
     );
 }

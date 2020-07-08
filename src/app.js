@@ -9,6 +9,10 @@ export default class App extends React.Component {
         this.state = {
             uploaderIsVisible: false,
         };
+        this.openModal = this.openModal.bind(this); //this we want to use in profilepic as it should open when you click on the profilepic;
+        this.setImage = this.setImage.bind(this);
+        this.componentDidMount = this.componentDidMount.bind(this);
+        this.closeModal = this.closeModal.bind(this);
     }
 
     //lifecycle methods
@@ -16,18 +20,32 @@ export default class App extends React.Component {
         // console.log("component did mount");
         //make axios req to server to get the information about the users (first, last , profile picture)
         //modify the users table to have a column for profile picture.
+        //we are going to store the response we got from server in state
+        //get a point where you can log this.state and see the first last and profile pic.
         axios.get("/user").then((res) => {
-            //we are going to store the response we got from server in state
-            //get a point where you can log this.state and see the first last and profile pic.
+            console.log("getting my res from get users: ", res);
+            if (res.data.ProfilePic === undefined) {
+                res.data.ProfilePic = "/default_image.png";
+            }
+            this.setState({
+                firstname: res.data.firstname,
+                lastname: res.data.lastname,
+                ProfilePic: res.data.ProfilePic,
+            });
         });
     }
 
-    toggleModal() {
-        console.log("togglemodal works: ");
+    openModal() {
+        console.log("openModal works: ");
         this.setState({
             uploaderIsVisible: true,
         });
-        this.toggleModal = this.toggleModal.bind(this); //this we want to use in prfilepic as it should open when you click on the profilepic
+    }
+    closeModal() {
+        console.log("closeModal works: ");
+        this.setState({
+            uploaderIsVisible: false,
+        });
     }
 
     setImage(newProfilePic) {
@@ -42,17 +60,21 @@ export default class App extends React.Component {
         console.log("this is my ProfilePic:", this.state.ProfilePic);
 
         return (
-            <div>
+            <div className="profile_picture">
                 <h1>hey hey hey</h1>
                 <ProfilePic
                     first={this.state.first}
                     last={this.state.last}
                     ProfilePic={this.state.ProfilePic}
-                    toggleModal={this.toggleModal}
+                    openModal={this.openModal}
+                    setImage={this.setImage}
                 />
-                <p onClick={this.toggleModal}>click me to open the modal</p>
+
                 {this.state.uploaderIsVisible && (
-                    <Uploader setImage={this.setImage} />
+                    <Uploader
+                        setImage={this.setImage}
+                        closeModal={this.closeModal}
+                    />
                 )}
             </div>
         );

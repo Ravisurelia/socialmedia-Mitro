@@ -4,17 +4,19 @@ const compression = require("compression");
 const cookieSession = require("cookie-session");
 const csurf = require("csurf");
 const { hash, compare } = require("./bc.js");
+const cryptoRandomString = require("crypto-random-string");
+const { sendEmail } = require("./ses");
+const s3 = require("./s3");
+const { s3Url } = require("./config.json");
 const {
     addingUsers,
     gettingPassword,
     insertingCode,
     checkingCode,
     updatingPassword,
+    gettingUser,
+    updatingImage,
 } = require("./db.js");
-const cryptoRandomString = require("crypto-random-string");
-const { sendEmail } = require("./ses");
-const s3 = require("./s3");
-const { s3Url } = require("./config.json");
 
 //==============================middleware=====================================================================//
 
