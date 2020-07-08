@@ -10,11 +10,15 @@ export default function ProfilePic(props) {
     //hint: don't over think this...if var is undefined we just need to give it a value
 
     return (
-        <div>
-            <p>
-                Name:{props.firstname} Last name: {props.lastname}
+        <div className="profilepic">
+            <p className="para">
+                Username: {props.firstname} {props.lastname}
             </p>
-            <img src={props.ProfilePic} onClick={props.openModal} />
+            <img
+                className="profile_image"
+                src={props.ProfilePic}
+                onClick={props.openModal}
+            />
         </div>
     );
 }

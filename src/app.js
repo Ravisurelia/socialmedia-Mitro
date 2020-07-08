@@ -61,10 +61,12 @@ export default class App extends React.Component {
 
         return (
             <div className="profile_picture">
-                <h1>hey hey hey</h1>
+                <h2 className="image_header">
+                    Please upload your profile image.
+                </h2>
                 <ProfilePic
-                    first={this.state.first}
-                    last={this.state.last}
+                    firstname={this.state.firstname}
+                    lastname={this.state.lastname}
                     ProfilePic={this.state.ProfilePic}
                     openModal={this.openModal}
                     setImage={this.setImage}

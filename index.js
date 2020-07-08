@@ -278,6 +278,43 @@ app.post("/password/reset/verify", (req, res) => {
         });
 });
 
+app.get("/user", (req, res) => {
+    gettingUser(req.session.userId)
+        .then((results) => {
+            console.log("my result in index.js get users: ", results);
+            res.json({
+                firstname: results.rows[0].first,
+                lastname: results.rows[0].last,
+                profilePic: results.rows[0].imgUrl,
+            });
+        })
+        .catch((err) => {
+            console.log("NOTHING HAPPENED IN GETTING USER: ", err);
+        });
+});
+
+app.get("/upload", uploader.single("file"), s3.upload, (req, res) => {
+    console.log("file: ", req.file); //file we just uploaded
+    console.log("input: ", req.body); //rest of the input field first, last
+    const { filename } = req.file;
+    const imageUrl = `${s3Url}${filename}`;
+
+    if (req.file) {
+        //you will do db insert here all the info
+        updatingImage(req.session.userId, imageUrl)
+            .then(({ rows }) => {
+                res.json(rows[0]);
+            })
+            .catch((err) => {
+                console.log("This is my uploadImage err: ", err);
+            });
+    } else {
+        res.json({
+            success: false,
+        });
+    }
+});
+
 app.get("*", function (req, res) {
     if (!req.session.userId) {
         res.redirect("/welcome");
