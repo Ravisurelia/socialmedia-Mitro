@@ -21,7 +21,7 @@ export default class Uploader extends React.Component {
 
     errorMessage(e) {
         this.setState({
-            error: false,
+            error: true,
         });
     }
 
@@ -52,15 +52,13 @@ export default class Uploader extends React.Component {
                         Profile picture is mandatory for identification!
                     </p>
                 )}
-                <div>
-                    <p className="modal-X" onClick={this.props.closeModal}>
-                        X
-                    </p>
-                </div>
                 <div className="main_modal">
-                    <h3 className="image_header">
-                        Please upload your picture here!
-                    </h3>
+                    <div>
+                        <p className="modal-X" onClick={this.props.closeModal}>
+                            X
+                        </p>
+                    </div>
+
                     <form className="modal-form" onSubmit={this.uploadImage}>
                         <input
                             className="image_file"

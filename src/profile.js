@@ -9,9 +9,9 @@ export default function Profile(props) {
                 Username: {props.firstname} {props.lastname}
             </p>
             <ProfilePic
-                ProfilePic={this.state.ProfilePic}
-                openModal={this.openModal}
-                setImage={this.setImage}
+                ProfilePic={props.ProfilePic}
+                openModal={props.openModal}
+                setImage={props.setImage}
             />
         </div>
     );

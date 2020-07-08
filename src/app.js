@@ -3,6 +3,7 @@ import axios from "./axios";
 import ProfilePic from "./profilepic";
 import Uploader from "./uploader";
 import Profile from "./profile";
+import BioEditor from "./bioeditor";
 
 export default class App extends React.Component {
     constructor() {
@@ -55,11 +56,11 @@ export default class App extends React.Component {
         });
     }
 
-    /*   setBio(newBio) {
+    setBio(newBio) {
         this.setState({
             bio: newBio,
         });
-    } */
+    }
     render() {
         /* console.log("this is my state: ", this.state);
         console.log("this is my first:", this.state.first);
@@ -71,20 +72,20 @@ export default class App extends React.Component {
                 <h3 className="image_header">
                     Please upload your profile Picture!
                 </h3>
-
-                {/*  <Profile
-                    firstname={this.state.firstname}
-                    lastname={this.state.lastname}
-                    ProfilePic={this.state.ProfilePic}
-                /> */}
-
                 <ProfilePic
-                    firstname={this.state.firstname}
-                    lastname={this.state.lastname}
                     ProfilePic={this.state.ProfilePic}
                     openModal={this.openModal}
                     setImage={this.setImage}
                 />
+                {!this.state.uploaderIsVisible && (
+                    <Profile
+                        firstname={this.state.firstname}
+                        lastname={this.state.lastname}
+                        ProfilePic={this.state.ProfilePic}
+                        openModal={this.openModal}
+                        setImage={this.setImage}
+                    />
+                )}
 
                 {this.state.uploaderIsVisible && (
                     <Uploader

@@ -11,9 +11,6 @@ export default function ProfilePic(props) {
 
     return (
         <div className="profilepic">
-            <p className="para">
-                Username: {props.firstname} {props.lastname}
-            </p>
             <img
                 className="profile_image"
                 src={props.ProfilePic}
