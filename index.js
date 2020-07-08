@@ -16,6 +16,7 @@ const {
     updatingPassword,
     gettingUser,
     updatingImage,
+    updatingBio,
 } = require("./db.js");
 
 //==============================middleware=====================================================================//
@@ -309,6 +310,22 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
             success: false,
         });
     }
+});
+
+app.post("/bioeditor", (req, res) => {
+    updatingBio(req.session.userId, req.body.bio)
+        .then((results) => {
+            console.log("my result in index.js post bioeditor: ", results);
+            if (results.rows[0]) {
+                res.json(results.rows[0]);
+            } else {
+                res.sendStatus(404);
+                console.log("this is my 404 error in bio editor");
+            }
+        })
+        .catch((err) => {
+            console.log("This is my bioedit err: ", err);
+        });
 });
 
 app.get("*", function (req, res) {

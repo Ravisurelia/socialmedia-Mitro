@@ -16,7 +16,7 @@ export default class App extends React.Component {
         this.componentDidMount = this.componentDidMount.bind(this);
         this.closeModal = this.closeModal.bind(this);
 
-        /*  this.setBio = this.setBio.bind(this); */
+        this.setBio = this.setBio.bind(this);
     }
 
     //lifecycle methods
@@ -33,6 +33,7 @@ export default class App extends React.Component {
                 firstname: res.data.first,
                 lastname: res.data.last,
                 ProfilePic: image,
+                biodraft: res.data.bio,
             });
         });
     }
@@ -58,7 +59,7 @@ export default class App extends React.Component {
 
     setBio(newBio) {
         this.setState({
-            bio: newBio,
+            biodraft: newBio,
         });
     }
     render() {
@@ -84,6 +85,8 @@ export default class App extends React.Component {
                         ProfilePic={this.state.ProfilePic}
                         openModal={this.openModal}
                         setImage={this.setImage}
+                        setBio={this.setBio}
+                        bio={this.state.biodraft}
                     />
                 )}
 
