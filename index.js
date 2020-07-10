@@ -17,6 +17,8 @@ const {
     gettingUser,
     updatingImage,
     updatingBio,
+    getting3Users,
+    gettingMatchingProfiles,
 } = require("./db.js");
 
 //==============================middleware=====================================================================//
@@ -287,6 +289,19 @@ app.get("/user", (req, res) => {
         })
         .catch((err) => {
             console.log("NOTHING HAPPENED IN GETTING USER: ", err);
+        });
+});
+app.get("/api/user/:id", (req, res) => {
+    if (req.session.userId == req.params.id) {
+        res.json({ match: true });
+    }
+    gettingUser(req.params.id)
+        .then((results) => {
+            console.log("my result in index.js get users id: ", results);
+            res.json(results.rows[0]);
+        })
+        .catch((err) => {
+            console.log("NOTHING HAPPENED IN GETTING USER ID: ", err);
         });
 });
 

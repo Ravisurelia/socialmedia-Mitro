@@ -82,3 +82,15 @@ exports.updatingBio = (id, bio) => {
         [id, bio]
     );
 };
+
+exports.getting3Users = (id) => {
+    return db.query(`SELECT * FROM users ORDER BY id DESC LIMIT 3`, [id]);
+};
+
+
+exports.gettingMatchingProfiles(val) {
+    return db.query(
+        `SELECT name FROM users WHERE first ILIKE $1;`,
+        [val + '%']
+    );
+}

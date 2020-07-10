@@ -3,8 +3,9 @@ import axios from "./axios";
 import ProfilePic from "./profilepic";
 import Uploader from "./uploader";
 import Profile from "./profile";
-/* import OtherProfiles from "./otherprofiles"; */
+import OtherProfiles from "./otherprofiles";
 import { BrowserRouter, Route } from "react-router-dom";
+import FindPeople from "./findpeople";
 
 export default class App extends React.Component {
     constructor() {
@@ -16,7 +17,6 @@ export default class App extends React.Component {
         this.setImage = this.setImage.bind(this);
         this.componentDidMount = this.componentDidMount.bind(this);
         this.closeModal = this.closeModal.bind(this);
-
         this.setBio = this.setBio.bind(this);
     }
 
@@ -31,6 +31,7 @@ export default class App extends React.Component {
                 image = res.data.imgurl;
             }
             this.setState({
+                userId: res.data.id,
                 firstname: res.data.first,
                 lastname: res.data.last,
                 ProfilePic: image,
@@ -87,7 +88,6 @@ export default class App extends React.Component {
                                 path="/"
                                 render={() => (
                                     <Profile
-                                        id={this.state.id}
                                         firstname={this.state.firstname}
                                         lastname={this.state.lastname}
                                         ProfilePic={this.state.ProfilePic}
@@ -98,7 +98,22 @@ export default class App extends React.Component {
                                     />
                                 )}
                             />
-                            {/* <Route path="/user/:id" component={OtherProfiles} /> */}
+
+                            <Route
+                                path="/user/:id"
+                                render={(props) => (
+                                    <OtherProfiles
+                                        currentUser={this.state.id}
+                                        match={props.match}
+                                        history={props.history}
+                                    />
+                                )}
+                            />
+
+                            <Route
+                                path="/users"
+                                render={(props) => <FindPeople />}
+                            />
                         </div>
                     </BrowserRouter>
                 )}

@@ -14,29 +14,36 @@ export default class OtherProfiles extends React.Component {
     }
 
     componentDidMount() {
-        axios.get("/user/:id").then((res) => {
-            console.log("getting my res from get users: ", res);
-            let image;
-            if (!res.data.imgurl) {
-                image = "/default_image.png";
-            } else {
-                image = res.data.imgurl;
+        axios.get(`/api/user/${this.props.match.params.id}`).then((res) => {
+            console.log("getting my res from get users in otherprofile: ", res);
+            console.log("my res data", res.data);
+
+            if (res.data.match) {
+                this.props.history.push("/");
             }
+
+            let image = res.data.imgurl;
+
             this.setState({
                 firstname: res.data.first,
                 lastname: res.data.last,
                 ProfilePic: image,
-                biodraft: res.data.bio,
+                bio: res.data.bio,
             });
         });
     }
 
     render() {
         return (
-            <div className="Profile_container">
-                <p>
-                    Username: {props.firstname} {props.lastname}
+            <div className="otherProfile_container">
+                <p className="otherprofile_username">
+                    Username: {this.state.firstname} {this.state.lastname}
                 </p>
+                <img
+                    src={this.state.ProfilePic || "/default_image.png"}
+                    className="otherprofile_img"
+                />
+                <p className="otherprofile_bio">User Bio: {this.state.bio}</p>
             </div>
         );
     }
