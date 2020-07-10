@@ -11,16 +11,11 @@ export default class BioEditor extends React.Component {
         };
         this.handleChange = this.handleChange.bind(this);
         this.bioEdit = this.bioEdit.bind(this);
-        /* this.errorMessage = this.errorMessage.bind(this); */
         this.handleSubmit = this.handleSubmit.bind(this);
         this.renderingBio = this.renderingBio.bind(this);
+        this.errorMessage = this.errorMessage.bind(this);
+        this.bioEditorIsNotVisible = this.bioEditorIsNotVisible.bind(this);
     }
-
-    /* errorMessage(e) {
-        this.setState({
-            error: true,
-        });
-    } */
 
     handleSubmit(e) {
         e.preventDefault();
@@ -56,12 +51,30 @@ export default class BioEditor extends React.Component {
         console.log("BIO EDITOR HANDLE CHANGE:", this.state);
     }
 
+    errorMessage(e) {
+        e.preventDefault();
+        this.setState({
+            error: false,
+        });
+    }
+
+    bioEditorIsNotVisible(e) {
+        e.preventDefault();
+        this.setState({
+            bioEditorIsVisible: false,
+        });
+    }
+
     renderingBio() {
         if (this.state.bioEditorIsVisible) {
             return (
                 <div>
-                    <textarea onChange={this.handleChange}></textarea>
+                    <textarea
+                        onChange={this.handleChange}
+                        onFocus={this.errorMessage}
+                    ></textarea>
                     <button onClick={this.handleSubmit}>Save</button>
+                    <button onClick={this.bioEditorIsNotVisible}>Cancel</button>
                 </div>
             );
         } else {
@@ -84,7 +97,14 @@ export default class BioEditor extends React.Component {
 
     render() {
         return (
-            <div className="bio_editor_container">{this.renderingBio()}</div>
+            <div>
+                <div className="bio_editor_container">
+                    {this.renderingBio()}
+                </div>
+                {this.state.errorMessage && (
+                    <p>Uppps! Something is wrong! Please reload the page!</p>
+                )}
+            </div>
         );
     }
 }

@@ -3,7 +3,8 @@ import axios from "./axios";
 import ProfilePic from "./profilepic";
 import Uploader from "./uploader";
 import Profile from "./profile";
-import BioEditor from "./bioeditor";
+/* import OtherProfiles from "./otherprofiles"; */
+import { BrowserRouter, Route } from "react-router-dom";
 
 export default class App extends React.Component {
     constructor() {
@@ -79,15 +80,27 @@ export default class App extends React.Component {
                     setImage={this.setImage}
                 />
                 {!this.state.uploaderIsVisible && (
-                    <Profile
-                        firstname={this.state.firstname}
-                        lastname={this.state.lastname}
-                        ProfilePic={this.state.ProfilePic}
-                        openModal={this.openModal}
-                        setImage={this.setImage}
-                        setBio={this.setBio}
-                        bio={this.state.biodraft}
-                    />
+                    <BrowserRouter>
+                        <div>
+                            <Route
+                                exact
+                                path="/"
+                                render={() => (
+                                    <Profile
+                                        id={this.state.id}
+                                        firstname={this.state.firstname}
+                                        lastname={this.state.lastname}
+                                        ProfilePic={this.state.ProfilePic}
+                                        openModal={this.openModal}
+                                        setImage={this.setImage}
+                                        bio={this.state.biodraft}
+                                        setBio={this.setBio}
+                                    />
+                                )}
+                            />
+                            {/* <Route path="/user/:id" component={OtherProfiles} /> */}
+                        </div>
+                    </BrowserRouter>
                 )}
 
                 {this.state.uploaderIsVisible && (
@@ -99,4 +112,17 @@ export default class App extends React.Component {
             </div>
         );
     }
+}
+
+{
+    /* <Profile
+    id={this.state.id}
+    firstname={this.state.firstname}
+    lastname={this.state.lastname}
+    ProfilePic={this.state.ProfilePic}
+    openModal={this.openModal}
+    setImage={this.setImage}
+    setBio={this.setBio}
+    bio={this.state.biodraft}
+/>; */
 }
