@@ -343,6 +343,34 @@ app.post("/bioeditor", (req, res) => {
         });
 });
 
+app.get("/latestusers", (req, res) => {
+    getting3Users()
+        .then((results) => {
+            console.log(
+                "my result in index.js in get getting3users: ",
+                results
+            );
+            res.json(results);
+        })
+        .catch((err) => {
+            console.log("This is my get3users err: ", err);
+        });
+});
+
+app.get("/gettingmatchedusers", (req, res) => {
+    gettingMatchingProfiles({ val: req.params.val })
+        .then((results) => {
+            console.log(
+                "my result in index.js in get gettingmatchingprofiles: ",
+                results
+            );
+            res.json(results.rows);
+        })
+        .catch((err) => {
+            console.log("This is my gettingmatchingprofiles err: ", err);
+        });
+});
+
 app.get("*", function (req, res) {
     if (!req.session.userId) {
         res.redirect("/welcome");

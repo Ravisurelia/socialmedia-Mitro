@@ -2,60 +2,63 @@ import React, { useState, useEffect } from "react";
 import axios from "./axios";
 
 export default function FindPeople(props) {
-    const [id, setID] = useState("");
-    const [firstname, setFirst] = useState("");
-    const [lastname, setLast] = useState("");
-    const [profilePic, setProfilePic] = useState("");
-    const [bio, setBio] = useState("");
-    const [info, setInfo] = useState([]);
+    const [latestUsers, setLatestUsers] = useState([]);
+    const [myUsers, setMyUsers] = useState([]);
+    const [searchedName, setSearchedName] = useState("");
 
-    if (e.target.value === "") {
-        useEffect(() => {
-            // console.log(`${first} has been rendered in useEffect!`);
-            axios.get(`/users/?q=${firstname || lastname}`).then(({ data }) => {
-                // console.log('data from flameegg: ', data);
-                setInfo(data);
+    useEffect(() => {
+        if (searchedName == "") {
+            axios.get("/latestusers").then(({ data }) => {
+                setLatestUsers(data.rows);
             });
-
-            // cleanup function - this runs BEFORE every re-render of our component
-            // acts as componentWillUnmount
-            return () => {
-                console.log(`about to replace ${firstname} with a new value`);
-            };
-        }, [info]);
-    } else {
-        useEffect(() => {
-            // console.log(`${first} has been rendered in useEffect!`);
-            axios.get(`/users/?q=${country}`).then(({ data }) => {
-                // console.log('data from flameegg: ', data);
-                setInfo(data);
-            });
-
-            // cleanup function - this runs BEFORE every re-render of our component
-            // acts as componentWillUnmount
-            return () => {
-                console.log(`about to replace ${firstname} with a new value`);
-            };
-        }, [info]);
-    }
+        } else {
+            if (searchedName !== "") {
+                axios
+                    .get(`/gettingmatchedusers/?searchedname=${searchedName}`)
+                    .then(({ data }) => {
+                        console.log(
+                            "data from getting matched profiles: ",
+                            data.rows
+                        );
+                        setMyUsers(data.rows);
+                    });
+            } else {
+                setMyUsers([]);
+            }
+        }
+    }, [searchedName]);
 
     return (
-        <div>
-            {/* <p>Hello {first}! We are learning hooks today!</p> */}
+        <div className="find-people">
+            <p className="search-people">Search People</p>
+
+            {searchedName == "" && (
+                <ul>
+                    {latestUsers.map((each, index) => (
+                        <li key={index}>
+                            <img className="searched-list" src={each.imgurl} />
+                            <p>
+                                {each.first}
+                                {each.last}
+                            </p>
+                        </li>
+                    ))}
+                </ul>
+            )}
             <input
-                onChange={(e) =>
-                    setFirst(e.target.value) || setLast(e.target.value)
-                }
-                defaultValue={""}
+                type="text"
+                onChange={(e) => setSearchedName(e.target.value)}
+                placeholder="Enter Name"
             />
-            {/* <input
-                placeholder="type country"
-                onChange={(e) => setCountry(e.target.value)}
-            />
- */}
             <ul>
-                {info.map((each, id) => (
-                    <li key={id}>{each}</li>
+                {myUsers.map((each, index) => (
+                    <li key={index}>
+                        <img className="searched-list" src={each.imgurl} />
+                        <p>
+                            {each.first}
+                            {each.last}
+                        </p>
+                    </li>
                 ))}
             </ul>
         </div>
