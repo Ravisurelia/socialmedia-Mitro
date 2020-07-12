@@ -43,17 +43,18 @@ export default function FindPeople(props) {
                 type="text"
                 onChange={(e) => setSearchedName(e.target.value)}
                 placeholder="Enter Name"
+                className="entername"
             />
-            <div className="three_users">
+            <div>
                 {searchedName == "" && (
-                    <ul>
+                    <ul className="three_users">
                         {latestUsers.map((each, index) => (
-                            <li key={index}>
+                            <li key={index} className="listof3">
                                 <img
-                                    className="searched-list"
+                                    className="searched-img"
                                     src={each.imgurl}
                                 />
-                                <p>
+                                <p className="first-last">
                                     {each.first} {each.last}
                                 </p>
                             </li>
@@ -62,12 +63,12 @@ export default function FindPeople(props) {
                 )}
             </div>
 
-            <div className="searched_people">
-                <ul>
+            <div>
+                <ul className="three_users1">
                     {myUsers.map((each, index) => (
-                        <li key={index}>
-                            <img className="searched-list" src={each.imgurl} />
-                            <p>
+                        <li key={index} className="listof3">
+                            <img className="searched-img" src={each.imgurl} />
+                            <p className="first-last">
                                 {each.first} {each.last}
                             </p>
                         </li>

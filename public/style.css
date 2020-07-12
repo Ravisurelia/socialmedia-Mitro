@@ -142,13 +142,34 @@ footer {
     font-weight: lighter;
     color: red;
 }
+.tree_logo {
+    width: 80px;
+    height: 80px;
+    justify-content: left;
+}
+.navbar {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 50px;
+
+    box-sizing: border-box;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+}
 
 .profilepic {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: right;
     align-items: center;
     text-align: center;
+}
+
+.profilepic_page {
+    float: right;
+    top: 0;
+    right: 100px;
 }
 
 .profile_picture {
@@ -159,13 +180,16 @@ footer {
     text-align: center;
 }
 .profile_image {
-    width: 300px;
-    height: 300px;
-    border-radius: 150px;
-    margin-top: 20px;
+    width: 70px;
+    height: 70px;
+    border-radius: 35px;
+    margin-top: 10px;
     border: 3px solid rgb(0, 0, 0);
     object-fit: cover;
     cursor: pointer;
+    float: right;
+    top: 10px;
+    right: 50px;
 }
 
 .para {
@@ -178,8 +202,9 @@ footer {
     font-size: 23px;
     font-family: sans-serif;
     font-weight: 600;
-    margin-top: 40px;
-    color: rgb(255, 81, 0);
+    margin-top: 10px;
+    margin-bottom: 5px;
+    color: rgb(0, 0, 0);
 }
 .modal-form {
     width: 600px;
@@ -245,4 +270,55 @@ footer {
     flex-direction: column;
     position: relative;
     padding: 20px;
+}
+.listof3 {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    text-decoration: none;
+}
+
+.three_users {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    overflow-x: hidden;
+    box-sizing: border-box;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+.three_users1 {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 20px;
+    overflow-x: hidden;
+    box-sizing: border-box;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+.first-last {
+    margin-left: 10px;
+}
+
+.searched-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 75px;
+    object-fit: cover;
+    object-position: top;
+    border: 1px black solid;
+}
+
+.search-people {
+    margin-top: 30px;
+}
+.entername {
+    margin-top: 20px;
 }

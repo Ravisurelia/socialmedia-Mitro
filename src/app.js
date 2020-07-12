@@ -72,14 +72,20 @@ export default class App extends React.Component {
 
         return (
             <div className="profile_picture">
-                <h3 className="image_header">
-                    Please upload your profile Picture!
-                </h3>
-                <ProfilePic
-                    ProfilePic={this.state.ProfilePic}
-                    openModal={this.openModal}
-                    setImage={this.setImage}
-                />
+                <div className="navbar">
+                    <img src="/tree.png" className="tree_logo" />
+                    <div className="profilepic_page">
+                        <ProfilePic
+                            ProfilePic={this.state.ProfilePic}
+                            openModal={this.openModal}
+                            setImage={this.setImage}
+                        />
+                    </div>
+                    <a href="/users" className="find">
+                        Find People
+                    </a>
+                </div>
+
                 {!this.state.uploaderIsVisible && (
                     <BrowserRouter>
                         <div>

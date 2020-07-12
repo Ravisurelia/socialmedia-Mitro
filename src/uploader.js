@@ -60,6 +60,9 @@ export default class Uploader extends React.Component {
                     </div>
 
                     <form className="modal-form" onSubmit={this.uploadImage}>
+                        <h3 className="image_header">
+                            Change your profile Picture!
+                        </h3>
                         <input
                             className="image_file"
                             type="file"
