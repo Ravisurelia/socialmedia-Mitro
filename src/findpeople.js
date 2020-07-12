@@ -9,58 +9,71 @@ export default function FindPeople(props) {
     useEffect(() => {
         if (searchedName == "") {
             axios.get("/latestusers").then(({ data }) => {
+                console.log("data from getting last 3 profiles: ", data);
                 setLatestUsers(data.rows);
             });
-        } else {
-            if (searchedName !== "") {
-                axios
-                    .get(`/gettingmatchedusers/?searchedname=${searchedName}`)
-                    .then(({ data }) => {
-                        console.log(
-                            "data from getting matched profiles: ",
-                            data.rows
-                        );
-                        setMyUsers(data.rows);
-                    });
-            } else {
-                setMyUsers([]);
-            }
         }
+    }, []);
+
+    useEffect(() => {
+        let abort;
+        if (searchedName != "") {
+            (async () => {
+                const { data } = await axios.get(
+                    `/api/gettingMatchingProfiles?searchName=${searchedName}`
+                );
+                if (!abort) {
+                    setMyUsers(data);
+                    console.log("data from getting match profiles: ", data);
+                    console.log("search names: ", searchedName);
+                }
+            })();
+        } else {
+            setMyUsers([]);
+        }
+        return () => {
+            abort = true;
+        };
     }, [searchedName]);
 
     return (
         <div className="find-people">
-            <p className="search-people">Search People</p>
-
-            {searchedName == "" && (
-                <ul>
-                    {latestUsers.map((each, index) => (
-                        <li key={index}>
-                            <img className="searched-list" src={each.imgurl} />
-                            <p>
-                                {each.first}
-                                {each.last}
-                            </p>
-                        </li>
-                    ))}
-                </ul>
-            )}
+            <h3 className="search-people">Search People</h3>
             <input
                 type="text"
                 onChange={(e) => setSearchedName(e.target.value)}
                 placeholder="Enter Name"
             />
-            <ul>
-                {myUsers.map((each, index) => (
-                    <li key={index}>
-                        <img className="searched-list" src={each.imgurl} />
-                        <p>
-                            {each.first}
-                            {each.last}
-                        </p>
-                    </li>
-                ))}
-            </ul>
+            <div className="three_users">
+                {searchedName == "" && (
+                    <ul>
+                        {latestUsers.map((each, index) => (
+                            <li key={index}>
+                                <img
+                                    className="searched-list"
+                                    src={each.imgurl}
+                                />
+                                <p>
+                                    {each.first} {each.last}
+                                </p>
+                            </li>
+                        ))}
+                    </ul>
+                )}
+            </div>
+
+            <div className="searched_people">
+                <ul>
+                    {myUsers.map((each, index) => (
+                        <li key={index}>
+                            <img className="searched-list" src={each.imgurl} />
+                            <p>
+                                {each.first} {each.last}
+                            </p>
+                        </li>
+                    ))}
+                </ul>
+            </div>
         </div>
     );
 }

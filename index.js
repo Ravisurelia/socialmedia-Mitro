@@ -357,14 +357,17 @@ app.get("/latestusers", (req, res) => {
         });
 });
 
-app.get("/gettingmatchedusers", (req, res) => {
-    gettingMatchingProfiles({ val: req.params.val })
+app.get("/api/gettingMatchingProfiles", (req, res) => {
+    let val = req.query.searchName;
+    console.log("query is ", req.query.searchName);
+    gettingMatchingProfiles(val)
         .then((results) => {
             console.log(
                 "my result in index.js in get gettingmatchingprofiles: ",
                 results
             );
             res.json(results.rows);
+            console.log("my results.rows: ", results.rows);
         })
         .catch((err) => {
             console.log("This is my gettingmatchingprofiles err: ", err);

@@ -87,8 +87,9 @@ exports.getting3Users = () => {
     return db.query(`SELECT * FROM users ORDER BY id DESC LIMIT 3`);
 };
 
-exports.gettingMatchingProfiles = ({ val }) => {
-    return db.query(`SELECT * FROM users WHERE (first || last) ILIKE $1;`, [
-        val + "%",
-    ]);
+exports.gettingMatchingProfiles = (val) => {
+    return db.query(
+        `SELECT * FROM users WHERE first ILIKE $1 or last ILIKE $1;`,
+        [val + "%"]
+    );
 };
