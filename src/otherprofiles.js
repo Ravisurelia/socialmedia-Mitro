@@ -10,6 +10,7 @@ export default class OtherProfiles extends React.Component {
             lastname: "",
             ProfilePic: "",
             bio: "",
+            id: "",
         };
         this.componentDidMount = this.componentDidMount.bind(this);
     }
@@ -30,6 +31,7 @@ export default class OtherProfiles extends React.Component {
                 lastname: res.data.last,
                 ProfilePic: image,
                 bio: res.data.bio,
+                id: res.data.id,
             });
         });
     }

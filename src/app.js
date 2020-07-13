@@ -80,6 +80,10 @@ export default class App extends React.Component {
                             openModal={this.openModal}
                             setImage={this.setImage}
                         />
+                        {/*  <img
+                            className="small_pic"
+                            src={this.state.ProfilePic}
+                        /> */}
                     </div>
                     <a href="/users" className="find">
                         Find People
@@ -94,6 +98,7 @@ export default class App extends React.Component {
                                 path="/"
                                 render={() => (
                                     <Profile
+                                        id={this.state.id}
                                         firstname={this.state.firstname}
                                         lastname={this.state.lastname}
                                         ProfilePic={this.state.ProfilePic}
@@ -109,6 +114,7 @@ export default class App extends React.Component {
                                 path="/user/:id"
                                 render={(props) => (
                                     <OtherProfiles
+                                        id={props.match.params.id}
                                         currentUser={this.state.id}
                                         match={props.match}
                                         history={props.history}

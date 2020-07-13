@@ -120,7 +120,7 @@ exports.sendingFriendsRequest = (myId, otherId) => {
 exports.updatingFriendsRequest = (myId, otherId) => {
     return db.query(
         `UPDATE friendships SET accepted=true WHERE receiver_id=$1 AND sender_id=$2 RETURNING *`,
-        [otherId, myId]
+        [myId, otherId]
     );
 };
 
