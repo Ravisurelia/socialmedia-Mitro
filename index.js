@@ -19,6 +19,10 @@ const {
     updatingBio,
     getting3Users,
     gettingMatchingProfiles,
+    getInitialStatus,
+    sendingFriendsRequest,
+    updatingFriendsRequest,
+    cancelFriendsRequest,
 } = require("./db.js");
 
 //==============================middleware=====================================================================//
@@ -371,6 +375,83 @@ app.get("/api/gettingMatchingProfiles", (req, res) => {
         })
         .catch((err) => {
             console.log("This is my gettingmatchingprofiles err: ", err);
+        });
+});
+
+app.get("/get-initial-status/:id", (req, res) => {
+    getInitialStatus(req.session.userId, req.params.id)
+        .then((results) => {
+            console.log(
+                "my result in index.js in get getInitialstatus: ",
+                results
+            );
+            if (results.rows[0]) {
+                if (results.rows[0].accepted) {
+                    res.json({ Friendship: true });
+                } else {
+                    if (req.session.userId === results.rows[0].receiver_id) {
+                        res.json({ Accepted: true });
+                    } else {
+                        res.json({ Pending: true });
+                    }
+                }
+            } else {
+                res.json({ Friendship: false });
+            }
+        })
+        .catch((err) => {
+            console.log("This is get getInitialstatus err in index.js: ", err);
+        });
+});
+
+app.post("/make-friend-request/:id", (req, res) => {
+    sendingFriendsRequest(req.session.userId, req.params.id)
+        .then((results) => {
+            console.log(
+                "my result in index.js in post sendingFriendsRequest: ",
+                results
+            );
+            res.json({ Pending: true });
+        })
+        .catch((err) => {
+            console.log(
+                "This is post sendingFriendsRequest err in index.js: ",
+                err
+            );
+        });
+});
+
+app.post("/accept-friend-request/:id", (req, res) => {
+    updatingFriendsRequest(req.session.userId, req.params.id)
+        .then((results) => {
+            console.log(
+                "my result in index.js in post updatingFriendsRequest: ",
+                results
+            );
+            res.json({ Friendship: true });
+        })
+        .catch((err) => {
+            console.log(
+                "This is post updatingFriendsRequest err in index.js: ",
+                err
+            );
+        });
+});
+
+app.post("/end-friendship/:id", (req, res) => {
+    cancelFriendsRequest(req.session.userId, req.params.id)
+        .then((results) => {
+            console.log(
+                "my result in index.js in post cancelFriendsRequest: ",
+                results
+            );
+            res.json({ Friendship: false });
+        })
+        .catch((err) => {
+            console.log(
+                "This is post cancelFriendsRequest err in index.js: ",
+                err
+            );
         });
 });
 
