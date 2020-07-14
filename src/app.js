@@ -1,11 +1,12 @@
 import React from "react";
 import axios from "./axios";
-import ProfilePic from "./profilepic";
+
 import Uploader from "./uploader";
 import Profile from "./profile";
 import OtherProfiles from "./otherprofiles";
 import { BrowserRouter, Route } from "react-router-dom";
 import FindPeople from "./findpeople";
+import { Link } from "react-router-dom";
 
 export default class App extends React.Component {
     constructor() {
@@ -72,27 +73,33 @@ export default class App extends React.Component {
 
         return (
             <div className="profile_picture">
-                <div className="navbar">
-                    <img src="/tree.png" className="tree_logo" />
-                    <div className="profilepic_page">
-                        <ProfilePic
-                            ProfilePic={this.state.ProfilePic}
-                            openModal={this.openModal}
-                            setImage={this.setImage}
-                        />
-                        {/*  <img
-                            className="small_pic"
-                            src={this.state.ProfilePic}
-                        /> */}
+                <BrowserRouter>
+                    <div className="navbar">
+                        <img src="/tree.png" className="tree_logo" />
+                        <div className="profilepic_page">
+                            {/* <ProfilePic
+                                ProfilePic={this.state.ProfilePic}
+                                openModal={this.openModal}
+                                setImage={this.setImage}
+                            /> */}
+                            <Link
+                                to="/"
+                                openModal={this.openModal}
+                                setImage={this.setImage}
+                            >
+                                <img
+                                    className="small_pic"
+                                    src={this.state.ProfilePic}
+                                />
+                            </Link>
+                        </div>
+                        <a href="/users" className="find">
+                            Find People
+                        </a>
                     </div>
-                    <a href="/users" className="find">
-                        Find People
-                    </a>
-                </div>
 
-                {!this.state.uploaderIsVisible && (
-                    <BrowserRouter>
-                        <div>
+                    {!this.state.uploaderIsVisible && (
+                        <div className="myprofile">
                             <Route
                                 exact
                                 path="/"
@@ -127,8 +134,8 @@ export default class App extends React.Component {
                                 render={() => <FindPeople />}
                             />
                         </div>
-                    </BrowserRouter>
-                )}
+                    )}
+                </BrowserRouter>
 
                 {this.state.uploaderIsVisible && (
                     <Uploader

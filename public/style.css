@@ -151,11 +151,22 @@ footer {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 50px;
-
+    margin-top: 10px;
     box-sizing: border-box;
     cursor: pointer;
     justify-content: center;
     align-items: center;
+}
+
+.find {
+    text-decoration: none;
+    font-family: sans-serif;
+    font-weight: bold;
+    color: black;
+}
+
+.find:hover {
+    color: blue;
 }
 
 .profilepic {
@@ -180,16 +191,13 @@ footer {
     text-align: center;
 }
 .profile_image {
-    width: 70px;
-    height: 70px;
-    border-radius: 35px;
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
     margin-top: 10px;
     border: 3px solid rgb(0, 0, 0);
     object-fit: cover;
     cursor: pointer;
-    float: right;
-    top: 10px;
-    right: 50px;
 }
 
 .para {
@@ -321,4 +329,107 @@ footer {
 }
 .entername {
     margin-top: 20px;
+}
+.small_pic {
+    width: 70px;
+    height: 70px;
+    border-radius: 35px;
+    object-fit: cover;
+    /*  object-position: top; */
+    border: 1px black solid;
+}
+
+.Profile_container {
+    width: 900px;
+    height: 550px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.myprofile {
+    margin-top: 20px;
+    border-radius: 50px;
+}
+
+.data-bio {
+    margin-top: 20px;
+    letter-spacing: 1px;
+    border-radius: 10px;
+    width: 500px;
+    height: 200px;
+    background-color: white;
+}
+
+.myusername {
+    font-family: sans-serif;
+    font-weight: lighter;
+    color: blue;
+    font-size: 18px;
+    margin-top: 10px;
+    letter-spacing: 2px;
+}
+
+.bio_editor_container {
+    margin-top: 20px;
+    font-size: 15px;
+    height: 150px;
+    padding: 10px;
+}
+.biobtn {
+    width: 70px;
+    height: 30px;
+    font-family: sans-serif;
+    font-weight: bold;
+    margin-top: 20px;
+    letter-spacing: 2px;
+    border-radius: 10px;
+}
+
+.mytextarea {
+    padding: 10px;
+    border: 1px solid black;
+}
+
+.otherProfile_container {
+    margin-top: 20px;
+    width: 800px;
+    height: 500px;
+    border: 2px black solid;
+    border-radius: 50px;
+    background-color: rgb(213, 254, 255);
+}
+
+.otherprofile_img {
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+    border: 2px black solid;
+    margin-top: 20px;
+    object-fit: cover;
+    object-position: top;
+}
+
+.otherprofile_username {
+    margin-top: 10px;
+    font-family: sans-serif;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.otherprofile_bio {
+    margin-top: 10px;
+    font-family: sans-serif;
+    letter-spacing: 1px;
+}
+
+.sendbtn {
+    margin-top: 30px;
+    width: 200px;
+    height: 30px;
+    font-family: sans-serif;
+    font-weight: bold;
+    letter-spacing: 2px;
+    border-radius: 10px;
+    cursor: pointer;
 }

@@ -70,11 +70,21 @@ export default class BioEditor extends React.Component {
             return (
                 <div>
                     <textarea
+                        rows="5"
+                        cols="50"
                         onChange={this.handleChange}
                         onFocus={this.errorMessage}
+                        className="mytextarea"
                     ></textarea>
-                    <button onClick={this.handleSubmit}>Save</button>
-                    <button onClick={this.bioEditorIsNotVisible}>Cancel</button>
+                    <button className="biobtn" onClick={this.handleSubmit}>
+                        Save
+                    </button>
+                    <button
+                        className="biobtn"
+                        onClick={this.bioEditorIsNotVisible}
+                    >
+                        Cancel
+                    </button>
                 </div>
             );
         } else {
@@ -82,13 +92,17 @@ export default class BioEditor extends React.Component {
                 return (
                     <div>
                         <p>{this.props.bio}</p>
-                        <button onClick={this.bioEdit}>Edit</button>
+                        <button className="biobtn" onClick={this.bioEdit}>
+                            Edit
+                        </button>
                     </div>
                 );
             } else {
                 return (
                     <div>
-                        <button onClick={this.bioEdit}>Add Bio</button>
+                        <button className="biobtn" onClick={this.bioEdit}>
+                            Add Bio
+                        </button>
                     </div>
                 );
             }

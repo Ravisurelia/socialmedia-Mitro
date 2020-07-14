@@ -6,16 +6,20 @@ export default function Profile(props) {
     console.log("props in profile pic", props);
     return (
         <div className="Profile_container">
-            <p>
-                Username: {props.firstname} {props.lastname}
-            </p>
-            <ProfilePic
-                ProfilePic={props.ProfilePic}
-                openModal={props.openModal}
-                setImage={props.setImage}
-            />
+            <div className="pro_picture">
+                <ProfilePic
+                    ProfilePic={props.ProfilePic}
+                    openModal={props.openModal}
+                    setImage={props.setImage}
+                />
+            </div>
 
-            <BioEditor bio={props.bio} setBio={props.setBio} />
+            <div className="data-bio">
+                <p className="myusername">
+                    Username: {props.firstname} {props.lastname}
+                </p>
+                <BioEditor bio={props.bio} setBio={props.setBio} />
+            </div>
         </div>
     );
 }

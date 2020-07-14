@@ -39,13 +39,13 @@ export default class OtherProfiles extends React.Component {
     render() {
         return (
             <div className="otherProfile_container">
-                <p className="otherprofile_username">
-                    Username: {this.state.firstname} {this.state.lastname}
-                </p>
                 <img
                     src={this.state.ProfilePic || "/default_image.png"}
                     className="otherprofile_img"
                 />
+                <p className="otherprofile_username">
+                    Username: {this.state.firstname} {this.state.lastname}
+                </p>
                 <p className="otherprofile_bio">User Bio: {this.state.bio}</p>
 
                 <Button id={this.props.id}></Button>

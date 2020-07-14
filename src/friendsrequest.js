@@ -71,7 +71,7 @@ export default function Button(props) {
 
     return (
         <div>
-            <button className="req_button" onClick={handleClick}>
+            <button className="sendbtn" onClick={handleClick}>
                 {buttonText}
             </button>
         </div>
