@@ -7,6 +7,7 @@ import OtherProfiles from "./otherprofiles";
 import { BrowserRouter, Route } from "react-router-dom";
 import FindPeople from "./findpeople";
 import { Link } from "react-router-dom";
+import Friends from "./friends";
 
 export default class App extends React.Component {
     constructor() {
@@ -82,11 +83,7 @@ export default class App extends React.Component {
                                 openModal={this.openModal}
                                 setImage={this.setImage}
                             /> */}
-                            <Link
-                                to="/"
-                                openModal={this.openModal}
-                                setImage={this.setImage}
-                            >
+                            <Link to="/">
                                 <img
                                     className="small_pic"
                                     src={this.state.ProfilePic}
@@ -95,6 +92,10 @@ export default class App extends React.Component {
                         </div>
                         <a href="/users" className="find">
                             Find People
+                        </a>
+
+                        <a href="/friends" className="find">
+                            Friends-List
                         </a>
                     </div>
 
@@ -133,6 +134,7 @@ export default class App extends React.Component {
                                 path="/users"
                                 render={() => <FindPeople />}
                             />
+                            <Route path="/friends" component={Friends} />
                         </div>
                     )}
                 </BrowserRouter>

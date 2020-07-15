@@ -133,3 +133,15 @@ exports.cancelFriendsRequest = (myId, otherId) => {
         [myId, otherId]
     );
 };
+
+exports.gettingFriendsList = (myId) => {
+    return db.query(
+        `SELECT users.id, first, last, imgurl, accepted
+    FROM friendships
+    JOIN users
+    ON (accepted = false AND receiver_id = $1 AND sender_id = users.id)
+    OR (accepted = true AND receiver_id = $1 AND sender_id = users.id)
+    OR (accepted = true AND receiver_id = $1 AND sender_id = users.id)`,
+        [myId]
+    );
+};

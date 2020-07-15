@@ -3,14 +3,31 @@ import ReactDOM from "react-dom";
 import Welcome from "./Welcome";
 import App from "./app";
 
+//////=====================================Redux middleware==================================================//////////
+
+import { createStore, applyMiddleware } from "redux";
+import { Provider } from "react-redux";
+import reduxPromise from "redux-promise";
+import { composeWithDevTools } from "redux-devtools-extension";
+import reducer from "./reducer";
+
+const store = createStore(
+    reducer,
+    composeWithDevTools(applyMiddleware(reduxPromise))
+);
+//////=====================================Redux middleware==================================================//////////
+
 /* const elements = <Welcome />; */
 let elem;
+const userIsLoggedIn = location.pathname != "/welcome";
 
-if (location.pathname === "/welcome") {
-    // runs if user is NOT logged in
-    elem = <Welcome />;
+if (userIsLoggedIn) {
+    elem = (
+        <Provider store={store}>
+            <App />
+        </Provider>
+    );
 } else {
-    // runs if the user IS logged in
-    elem = <App />;
+    elem = <Welcome />;
 }
 ReactDOM.render(elem, document.querySelector("main"));

@@ -23,6 +23,7 @@ const {
     sendingFriendsRequest,
     updatingFriendsRequest,
     cancelFriendsRequest,
+    gettingFriendsList,
 } = require("./db.js");
 
 //==============================middleware=====================================================================//
@@ -455,6 +456,19 @@ app.post("/end-friendship/:id", (req, res) => {
         });
 });
 
+app.get("/friendsList", (req, res) => {
+    gettingFriendsList(req.session.userId)
+        .then((results) => {
+            console.log(
+                "my result in index.js in get friends-wannabes: ",
+                results
+            );
+            res.json(results.rows);
+        })
+        .catch((err) => {
+            console.log("This is get friends-wannabes err in index.js: ", err);
+        });
+});
 app.get("*", function (req, res) {
     if (!req.session.userId) {
         res.redirect("/welcome");
