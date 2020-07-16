@@ -1,6 +1,7 @@
 * {
     margin: 0px;
     padding: 0px;
+    text-decoration: none;
 }
 
 .welcome_main {
@@ -149,13 +150,14 @@ footer {
 }
 .navbar {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     grid-gap: 50px;
     margin-top: 10px;
     box-sizing: border-box;
     cursor: pointer;
     justify-content: center;
     align-items: center;
+    border-bottom: lightseagreen 2px solid;
 }
 
 .find {
@@ -313,6 +315,9 @@ footer {
 }
 .first-last {
     margin-left: 10px;
+    text-decoration: none;
+    font-weight: lighter;
+    color: black;
 }
 
 .searched-img {
@@ -363,7 +368,7 @@ footer {
 
 .myusername {
     font-family: sans-serif;
-    font-weight: lighter;
+    font-weight: bold;
     color: blue;
     font-size: 18px;
     margin-top: 10px;
@@ -385,10 +390,44 @@ footer {
     letter-spacing: 2px;
     border-radius: 10px;
 }
+.biobtn1 {
+    width: 70px;
+    height: 30px;
+    font-family: sans-serif;
+    font-weight: bold;
+    margin-top: 20px;
+    letter-spacing: 2px;
+    border-radius: 10px;
+}
+
+.biobtn:hover {
+    background-color: rgb(92, 253, 226);
+}
+
+.biobtn1:hover {
+    background-color: rgb(255, 0, 0);
+}
 
 .mytextarea {
     padding: 10px;
-    border: 1px solid black;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: lightblue;
+}
+
+.add_bio {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
 }
 
 .otherProfile_container {
@@ -432,4 +471,54 @@ footer {
     letter-spacing: 2px;
     border-radius: 10px;
     cursor: pointer;
+}
+
+.accepted_profiles {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 20px;
+    overflow-x: hidden;
+    box-sizing: border-box;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    text-decoration: none;
+}
+
+.first-last1 {
+    font-size: 25px;
+    font-family: sans-serif;
+    font-weight: bold;
+    color: rgb(17, 109, 17);
+}
+
+.first-last2 {
+    font-size: 25px;
+    font-family: sans-serif;
+    font-weight: bold;
+    color: rgb(255, 2, 2);
+    margin-top: 20px;
+}
+
+.first-last-p {
+    text-decoration: none;
+    font-weight: lighter;
+    color: black;
+}
+
+#red {
+    background-color: white;
+}
+
+#red:hover {
+    background-color: red;
+}
+
+#green {
+    background-color: white;
+}
+
+#green:hover {
+    background-color: green;
 }

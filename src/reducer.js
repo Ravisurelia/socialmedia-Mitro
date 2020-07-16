@@ -7,8 +7,35 @@ export default function reducer(state = { friends: [] }, action) {
             friends: action.friends,
         };
     }
+
+    if (action.type == "ACCEPT_FRIEND") {
+        let newFriends = [];
+        state.friends.map((each) => {
+            if (action.id == each.id) {
+                each.accepted = true;
+            }
+            newFriends.push(each);
+        });
+        state = {
+            ...state,
+            friends: newFriends,
+        };
+    }
+    if (action.type == "UNFRIEND") {
+        let newFriends = [];
+        state.friends.map((each) => {
+            if (action.id != each.id) {
+                newFriends.push(each);
+            }
+        });
+        state = {
+            ...state,
+            friends: newFriends,
+        };
+    }
     //state = {} means i am passing the reducer a global state
     //action- here the action is the change we wanna make which is a big object
+    console.log("this is my action in friends state:", action);
     return state;
 }
 

@@ -141,7 +141,8 @@ exports.gettingFriendsList = (myId) => {
     JOIN users
     ON (accepted = false AND receiver_id = $1 AND sender_id = users.id)
     OR (accepted = true AND receiver_id = $1 AND sender_id = users.id)
-    OR (accepted = true AND receiver_id = $1 AND sender_id = users.id)`,
+    OR (accepted = true AND receiver_id = $1 AND sender_id = users.id) 
+    `,
         [myId]
     );
 };

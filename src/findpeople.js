@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "./axios";
+import { Link } from "react-router-dom";
 
 export default function FindPeople(props) {
     const [latestUsers, setLatestUsers] = useState([]);
@@ -49,15 +50,19 @@ export default function FindPeople(props) {
                 {searchedName == "" && (
                     <ul className="three_users">
                         {latestUsers.map((each, index) => (
-                            <li key={index} className="listof3">
-                                <img
-                                    className="searched-img"
-                                    src={each.imgurl}
-                                />
-                                <p className="first-last">
-                                    {each.first} {each.last}
-                                </p>
-                            </li>
+                            <Link to={`/user/${each.id}`} key={index}>
+                                <li className="listof3">
+                                    <img
+                                        className="searched-img"
+                                        src={
+                                            each.imgurl || "/default_image.png"
+                                        }
+                                    />
+                                    <p className="first-last">
+                                        {each.first} {each.last}
+                                    </p>
+                                </li>
+                            </Link>
                         ))}
                     </ul>
                 )}
@@ -66,12 +71,17 @@ export default function FindPeople(props) {
             <div>
                 <ul className="three_users1">
                     {myUsers.map((each, index) => (
-                        <li key={index} className="listof3">
-                            <img className="searched-img" src={each.imgurl} />
-                            <p className="first-last">
-                                {each.first} {each.last}
-                            </p>
-                        </li>
+                        <Link to={`/user/${each.id}`} key={index}>
+                            <li className="listof3">
+                                <img
+                                    className="searched-img"
+                                    src={each.imgurl || "/default_image.png"}
+                                />
+                                <p className="first-last">
+                                    {each.first} {each.last}
+                                </p>
+                            </li>
+                        </Link>
                     ))}
                 </ul>
             </div>

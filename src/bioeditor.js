@@ -68,7 +68,7 @@ export default class BioEditor extends React.Component {
     renderingBio() {
         if (this.state.bioEditorIsVisible) {
             return (
-                <div>
+                <div id="add_bio">
                     <textarea
                         rows="5"
                         cols="50"
@@ -76,21 +76,23 @@ export default class BioEditor extends React.Component {
                         onFocus={this.errorMessage}
                         className="mytextarea"
                     ></textarea>
-                    <button className="biobtn" onClick={this.handleSubmit}>
-                        Save
-                    </button>
-                    <button
-                        className="biobtn"
-                        onClick={this.bioEditorIsNotVisible}
-                    >
-                        Cancel
-                    </button>
+                    <div id="buttons">
+                        <button className="biobtn" onClick={this.handleSubmit}>
+                            Save
+                        </button>
+                        <button
+                            className="biobtn1"
+                            onClick={this.bioEditorIsNotVisible}
+                        >
+                            Cancel
+                        </button>
+                    </div>
                 </div>
             );
         } else {
             if (this.props.bio) {
                 return (
-                    <div>
+                    <div id="bio_and_button">
                         <p>{this.props.bio}</p>
                         <button className="biobtn" onClick={this.bioEdit}>
                             Edit

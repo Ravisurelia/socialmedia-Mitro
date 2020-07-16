@@ -8,6 +8,8 @@ const cryptoRandomString = require("crypto-random-string");
 const { sendEmail } = require("./ses");
 const s3 = require("./s3");
 const { s3Url } = require("./config.json");
+/* const server = require("http").Server(app);
+const io = require("socket.io")(server, { origins: "localhost:8080" }); */
 const {
     addingUsers,
     gettingPassword,
