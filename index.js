@@ -471,6 +471,12 @@ app.get("/friendsList", (req, res) => {
             console.log("This is get friends-wannabes err in index.js: ", err);
         });
 });
+
+app.get("/logout", (req, res) => {
+    req.session.userId = null;
+    res.redirect("/");
+});
+
 app.get("*", function (req, res) {
     if (!req.session.userId) {
         res.redirect("/welcome");

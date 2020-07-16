@@ -97,6 +97,9 @@ export default class App extends React.Component {
                         <a href="/friends" className="find">
                             Friends-List
                         </a>
+                        <a href="/logout" className="logout">
+                            Logout
+                        </a>
                     </div>
 
                     {!this.state.uploaderIsVisible && (
@@ -135,6 +138,7 @@ export default class App extends React.Component {
                                 render={() => <FindPeople />}
                             />
                             <Route path="/friends" component={Friends} />
+                            {/* <Route path="/logout" component={Logout} /> */}
                         </div>
                     )}
                 </BrowserRouter>
