@@ -33,6 +33,9 @@ export default function reducer(state = { friends: [] }, action) {
             friends: newFriends,
         };
     }
+
+    if (action.type == "GETTING_TEN_MESSAGES") {
+    }
     //state = {} means i am passing the reducer a global state
     //action- here the action is the change we wanna make which is a big object
     console.log("this is my action in friends state:", action);

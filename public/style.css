@@ -150,7 +150,7 @@ footer {
 }
 .navbar {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     grid-gap: 50px;
     margin-top: 10px;
     box-sizing: border-box;
@@ -532,4 +532,16 @@ footer {
 
 .logout:hover {
     color: red;
+}
+
+.chat-container {
+    height: 300px;
+    width: 700px;
+    overflow-y: scroll;
+}
+
+.chat-text {
+    height: 60px;
+    width: 500px;
+    margin-bottom: 0;
 }

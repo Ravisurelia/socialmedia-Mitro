@@ -22,3 +22,17 @@ export async function unfriend(id) {
         id,
     };
 }
+
+export async function addMessage(msgs) {
+    return {
+        type: "GETTING_TEN_MESSAGES",
+        msgs,
+    };
+}
+
+export async function addMessage(msgs) {
+    return {
+        type: "ADD_MESSAGES",
+        msgs,
+    };
+}

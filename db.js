@@ -146,3 +146,34 @@ exports.gettingFriendsList = (myId) => {
         [myId]
     );
 };
+
+exports.getLastTenMessages = () => {
+    return db.query(
+        `
+        SELECT users.id, chats.id AS message_id, first, last, imgurl, message,  chats.created_at
+        FROM chats
+        JOIN users ON (sender_id = users.id)
+        ORDER BY chats.created_at DESC
+        LIMIT  10`
+    );
+};
+
+exports.insertNewMessage = (id, message) => {
+    return db.query(
+        `
+    INSERT INTO chats (sender_id, message) VALUES($1, $2) RETURNING *
+    `,
+        [id, message]
+    );
+};
+
+exports.getMessageInformation = () => {
+    return db.query(
+        `
+        SELECT users.id, chats.id AS message_id, first, last, imgurl, message,  chats.created_at
+        FROM chats
+        JOIN users ON (sender_id = users.id)
+        ORDER BY chats.created_at DESC
+        LIMIT  10`
+    );
+};

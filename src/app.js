@@ -8,6 +8,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 import FindPeople from "./findpeople";
 import { Link } from "react-router-dom";
 import Friends from "./friends";
+import Chat from "./chat";
 
 export default class App extends React.Component {
     constructor() {
@@ -100,6 +101,9 @@ export default class App extends React.Component {
                         <a href="/logout" className="logout">
                             Logout
                         </a>
+                        <a href="/chat" className="logout">
+                            My Chat
+                        </a>
                     </div>
 
                     {!this.state.uploaderIsVisible && (
@@ -138,7 +142,7 @@ export default class App extends React.Component {
                                 render={() => <FindPeople />}
                             />
                             <Route path="/friends" component={Friends} />
-                            {/* <Route path="/logout" component={Logout} /> */}
+                            <Route path="/chat" component={Chat} />
                         </div>
                     )}
                 </BrowserRouter>

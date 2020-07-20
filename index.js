@@ -1,5 +1,12 @@
 const express = require("express");
 const app = express();
+//======socket boilerplate=================================//
+const server = require("http").Server(app);
+const io = require("socket.io")(server, {
+    origins: "localhost:8080",
+});
+//======socket boilerplate=================================//
+
 const compression = require("compression");
 const cookieSession = require("cookie-session");
 const csurf = require("csurf");
@@ -8,8 +15,7 @@ const cryptoRandomString = require("crypto-random-string");
 const { sendEmail } = require("./ses");
 const s3 = require("./s3");
 const { s3Url } = require("./config.json");
-/* const server = require("http").Server(app);
-const io = require("socket.io")(server, { origins: "localhost:8080" }); */
+
 const {
     addingUsers,
     gettingPassword,
@@ -26,6 +32,9 @@ const {
     updatingFriendsRequest,
     cancelFriendsRequest,
     gettingFriendsList,
+    getLastTenMessages,
+    insertNewMessage,
+    getMessageInformation,
 } = require("./db.js");
 
 //==============================middleware=====================================================================//
@@ -33,12 +42,25 @@ const {
 app.use(compression());
 app.use(express.static(__dirname + "/public"));
 
-app.use(
+//======cookie session middleware=================================//
+
+/* app.use(
     cookieSession({
         secret: `Ì am always angry.`,
         maxAge: 1000 * 60 * 60 * 24 * 14, //to set the cookies-how long we want cookie to last
     })
-);
+); */
+
+const cookieSessionMiddleware = cookieSession({
+    secret: `I'm always angry.`,
+    maxAge: 1000 * 60 * 60 * 24 * 90,
+});
+
+app.use(cookieSessionMiddleware);
+io.use(function (socket, next) {
+    cookieSessionMiddleware(socket.request, socket.request.res, next);
+});
+//======cookie session middleware=================================//
 
 app.use(
     express.urlencoded({
@@ -485,6 +507,43 @@ app.get("*", function (req, res) {
     }
 });
 
-app.listen(8080, function () {
+server.listen(8080, function () {
     console.log("I'm listening.");
+});
+
+io.on("connection", function (socket) {
+    //all of our socket code has to go inside here
+    //do not write anything outside or it will not work
+    console.log(`Socket id ${socket.id} is now connected`);
+
+    //we only want to do socket when user is logged in
+    if (!socket.request.session.userId) {
+        return socket.disconnect(true);
+    }
+    //if user is at this point after they are successfully logged in
+    const userId = socket.request.session.userId;
+
+    //this is the perfect place to get the last 10 messages from the chat
+
+    /* db.getLastTenMessages().then((results) => {
+        console.log("my results in socket.io: ", results.rows);
+        //your db query for getting the last 10 messages will need ro br a JOIN
+        //you will need info from both the users table and chat table.
+        //(first, last, image and chat messages)
+        //once you have the last 10 messages you will need to send it to the client
+
+        io.socket.emit("chatMessages", results.rows);
+    }); */
+
+    socket.on("My amazing chat message", (newMessage) => {
+        console.log("this is coming from chat.js:", newMessage);
+        console.log("user who sent newMessage is :", userId);
+
+        //1. do a db query to store the new chat message into  the chat table
+        //2. do db query to get the info about the user- first, last img and will probably need to JOIN.
+        //3. once you have all the data we want to emit our messages object to everyone so everyone can see it immediately.
+
+        //we are emitting the messages back to he client
+        io.sockets.emit("addChatMessage", newMessage);
+    });
 });

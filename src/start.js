@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Welcome from "./Welcome";
 import App from "./app";
+import { init } from "./socket";
 
 //////=====================================Redux middleware==================================================//////////
 
@@ -22,6 +23,7 @@ let elem;
 const userIsLoggedIn = location.pathname != "/welcome";
 
 if (userIsLoggedIn) {
+    init(store); //here  we are giving access to redux for socket
     elem = (
         <Provider store={store}>
             <App />
