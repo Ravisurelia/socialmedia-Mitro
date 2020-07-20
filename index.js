@@ -525,25 +525,22 @@ io.on("connection", function (socket) {
 
     //this is the perfect place to get the last 10 messages from the chat
 
-    /* db.getLastTenMessages().then((results) => {
+    getLastTenMessages().then((results) => {
         console.log("my results in socket.io: ", results.rows);
-        //your db query for getting the last 10 messages will need ro br a JOIN
-        //you will need info from both the users table and chat table.
-        //(first, last, image and chat messages)
-        //once you have the last 10 messages you will need to send it to the client
-
-        io.socket.emit("chatMessages", results.rows);
-    }); */
+        io.sockets.emit("chatMessages", results.rows.reverse());
+        console.log("last 10 messages : ", results.rows);
+    });
 
     socket.on("My amazing chat message", (newMessage) => {
         console.log("this is coming from chat.js:", newMessage);
         console.log("user who sent newMessage is :", userId);
 
-        //1. do a db query to store the new chat message into  the chat table
-        //2. do db query to get the info about the user- first, last img and will probably need to JOIN.
-        //3. once you have all the data we want to emit our messages object to everyone so everyone can see it immediately.
-
-        //we are emitting the messages back to he client
-        io.sockets.emit("addChatMessage", newMessage);
+        insertNewMessage(userId, newMessage).then((results) => {
+            console.log("Messages sent to chatBox ", results.rows[0]);
+            getMessageInformation(userId).then((results) => {
+                console.log("SENDER: ", results.rows[0]);
+                io.sockets.emit("chatMessage", results.rows[0]);
+            });
+        });
     });
 });

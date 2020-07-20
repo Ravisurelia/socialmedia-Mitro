@@ -167,13 +167,14 @@ exports.insertNewMessage = (id, message) => {
     );
 };
 
-exports.getMessageInformation = () => {
+exports.getMessageInformation = (id) => {
     return db.query(
         `
         SELECT users.id, chats.id AS message_id, first, last, imgurl, message,  chats.created_at
         FROM chats
-        JOIN users ON (sender_id = users.id)
+        JOIN users ON (sender_id = users.id AND sender_id = $1)
         ORDER BY chats.created_at DESC
-        LIMIT  10`
+        LIMIT  10`,
+        [id]
     );
 };

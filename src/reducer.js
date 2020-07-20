@@ -34,11 +34,21 @@ export default function reducer(state = { friends: [] }, action) {
         };
     }
 
-    if (action.type == "GETTING_TEN_MESSAGES") {
+    if (action.type == "LAST_TEN_MESSAGES") {
+        state = {
+            ...state,
+            chatMessages: action.msgs,
+        };
     }
+    if (action.type == "ADD_MESSAGES") {
+        state = Object.assign({}, state, {
+            chatMessages: state.chatMessages.concat(action.msg),
+        });
+    }
+
     //state = {} means i am passing the reducer a global state
     //action- here the action is the change we wanna make which is a big object
-    console.log("this is my action in friends state:", action);
+    console.log("this is my action in friends state:", action, state);
     return state;
 }
 
