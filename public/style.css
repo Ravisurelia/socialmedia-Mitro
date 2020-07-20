@@ -284,11 +284,12 @@ footer {
 .listof3 {
     margin-top: 10px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
     text-decoration: none;
+    margin: 30px;
 }
 
 .three_users {
@@ -316,8 +317,9 @@ footer {
 .first-last {
     margin-left: 10px;
     text-decoration: none;
-    font-weight: lighter;
+    font-family: sans-serif;
     color: black;
+    margin-top: 5px;
 }
 
 .searched-img {
@@ -336,9 +338,9 @@ footer {
     margin-top: 20px;
 }
 .small_pic {
-    width: 70px;
-    height: 70px;
-    border-radius: 35px;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
     object-fit: cover;
     /*  object-position: top; */
     border: 1px black solid;
@@ -351,6 +353,10 @@ footer {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    border: black 2px solid;
+    margin-top: 20px;
+    border-radius: 30px;
+    background-color: rgb(201, 234, 245);
 }
 .myprofile {
     margin-top: 20px;
@@ -363,14 +369,13 @@ footer {
     border-radius: 10px;
     width: 500px;
     height: 200px;
-    background-color: white;
 }
 
 .myusername {
     font-family: sans-serif;
     font-weight: bold;
-    color: blue;
-    font-size: 18px;
+    color: rgb(0, 0, 131);
+    font-size: 20px;
     margin-top: 10px;
     letter-spacing: 2px;
 }
@@ -535,14 +540,18 @@ footer {
 }
 
 .chat-title {
-    border: black 1px solid;
-    border-radius: 20px;
+    border: black 2px solid;
+    border-radius: 30px;
     padding: 20px;
     margin-top: 20px;
 }
 .chat-title1 {
     border: black 1px solid;
     border-radius: 20px;
+    padding: 10px;
+    background-color: lightgray;
+    font-weight: bold;
+    letter-spacing: 1.5px;
 }
 .img-message {
     text-align: center;
@@ -561,15 +570,22 @@ footer {
 }
 
 .chat-text {
-    height: 60px;
+    height: 30px;
     width: 600px;
-    margin-bottom: 0;
+    text-align: left;
+    font-family: sans-serif;
+    text-align: left;
+    justify-content: center;
+    padding: 5px;
+    letter-spacing: 1px;
+    font-size: 15px;
 }
 
 .chat-msg {
     font-family: sans-serif;
     font-weight: lighter;
     margin-left: 10px;
+    font-size: 15px;
 }
 
 .chat-img {

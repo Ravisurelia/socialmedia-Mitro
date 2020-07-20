@@ -78,19 +78,7 @@ export default class App extends React.Component {
                 <BrowserRouter>
                     <div className="navbar">
                         <img src="/tree.png" className="tree_logo" />
-                        <div className="profilepic_page">
-                            {/* <ProfilePic
-                                ProfilePic={this.state.ProfilePic}
-                                openModal={this.openModal}
-                                setImage={this.setImage}
-                            /> */}
-                            <Link to="/">
-                                <img
-                                    className="small_pic"
-                                    src={this.state.ProfilePic}
-                                />
-                            </Link>
-                        </div>
+
                         <a href="/users" className="find">
                             Find People
                         </a>
@@ -98,12 +86,19 @@ export default class App extends React.Component {
                         <a href="/friends" className="find">
                             Friends-List
                         </a>
+
+                        <a href="/chat" className="find">
+                            My Chat
+                        </a>
                         <a href="/logout" className="logout">
                             Logout
                         </a>
-                        <a href="/chat" className="logout">
-                            My Chat
-                        </a>
+                        <Link to="/">
+                            <img
+                                className="small_pic"
+                                src={this.state.ProfilePic}
+                            />
+                        </Link>
                     </div>
 
                     {!this.state.uploaderIsVisible && (
