@@ -18,10 +18,15 @@ export default function Profile(props) {
 
     const deleteAccount = (e) => {
         e.preventDefault();
-        axios.post("/deleteAccount").then((res) => {
-            console.log("this is my delete res: ", res.data);
-            location.replace("/");
-        });
+        axios
+            .post("/deleteAccount")
+            .then((res) => {
+                console.log("this is my delete res: ", res.data);
+                location.replace("/");
+            })
+            .catch((err) => {
+                console.log("this is my delete err:", err);
+            });
     };
     return (
         <div className="Profile_container">

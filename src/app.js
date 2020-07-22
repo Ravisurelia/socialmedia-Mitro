@@ -1,6 +1,5 @@
 import React from "react";
 import axios from "./axios";
-
 import Uploader from "./uploader";
 import Profile from "./profile";
 import OtherProfiles from "./otherprofiles";
@@ -77,18 +76,9 @@ export default class App extends React.Component {
             <div className="profile_picture">
                 <BrowserRouter>
                     <div className="navbar">
-                        <img src="/tree.png" className="tree_logo" />
-
-                        {/* <a href="/users" className="find">
-                            Find People
-                        </a> */}
-
-                        {/* <a href="/friends" className="find">
-                            Friends-List
-                        </a> */}
-                        {/* <a href="/chat" className="find">
-                            My Chat
-                        </a> */}
+                        <Link to="/">
+                            <img src="/tree.png" className="tree_logo" />
+                        </Link>
                         <Link to="/users" className="find">
                             Find People
                         </Link>
@@ -163,17 +153,4 @@ export default class App extends React.Component {
             </div>
         );
     }
-}
-
-{
-    /* <Profile
-    id={this.state.id}
-    firstname={this.state.firstname}
-    lastname={this.state.lastname}
-    ProfilePic={this.state.ProfilePic}
-    openModal={this.openModal}
-    setImage={this.setImage}
-    setBio={this.setBio}
-    bio={this.state.biodraft}
-/>; */
 }
