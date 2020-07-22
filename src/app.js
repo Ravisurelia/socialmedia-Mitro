@@ -79,21 +79,33 @@ export default class App extends React.Component {
                     <div className="navbar">
                         <img src="/tree.png" className="tree_logo" />
 
-                        <a href="/users" className="find">
+                        {/* <a href="/users" className="find">
                             Find People
-                        </a>
+                        </a> */}
 
-                        <a href="/friends" className="find">
+                        {/* <a href="/friends" className="find">
                             Friends-List
-                        </a>
-
-                        <a href="/chat" className="find">
+                        </a> */}
+                        {/* <a href="/chat" className="find">
                             My Chat
-                        </a>
+                        </a> */}
+                        <Link to="/users" className="find">
+                            Find People
+                        </Link>
+
+                        <Link to="/friends" className="find">
+                            Friends-List
+                        </Link>
+                        <Link to="/chat" className="find">
+                            Mitro-Chat
+                        </Link>
+
                         <a href="/logout" className="logout">
                             Logout
                         </a>
-                        <Link to="/">
+                        <Link to="/" className="nav-name">
+                            <p>Hey, {this.state.firstname}</p>
+
                             <img
                                 className="small_pic"
                                 src={this.state.ProfilePic}

@@ -178,3 +178,7 @@ exports.getMessageInformation = (id) => {
         [id]
     );
 };
+
+exports.deleteAccount = (id) => {
+    return db.query(`DELETE FROM users WHERE (id = $1)`, [id]);
+};

@@ -35,6 +35,7 @@ const {
     getLastTenMessages,
     insertNewMessage,
     getMessageInformation,
+    deleteAccount,
 } = require("./db.js");
 
 //==============================middleware=====================================================================//
@@ -499,6 +500,13 @@ app.get("/logout", (req, res) => {
     res.redirect("/");
 });
 
+app.post("/deleteAccount", (req, res) => {
+    console.log("hit delete acc");
+    deleteAccount(req.session.userId).then(() => {
+        req.session.userId = null;
+        res.json({ success: true });
+    });
+});
 app.get("*", function (req, res) {
     if (!req.session.userId) {
         res.redirect("/welcome");

@@ -344,11 +344,20 @@ footer {
     object-fit: cover;
     /*  object-position: top; */
     border: 1px black solid;
+    margin-left: 7px;
+}
+
+.nav-name {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color: navy;
 }
 
 .Profile_container {
     width: 900px;
-    height: 550px;
+    height: 600px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -359,10 +368,16 @@ footer {
     background-color: rgb(201, 234, 245);
 }
 .myprofile {
-    margin-top: 20px;
+    margin-top: 0px;
     border-radius: 50px;
 }
 
+.delete-para {
+    margin-top: 10px;
+    font-family: sans-serif;
+    font-weight: lighter;
+    letter-spacing: 1px;
+}
 .data-bio {
     margin-top: 20px;
     letter-spacing: 1px;
@@ -476,6 +491,38 @@ footer {
     letter-spacing: 2px;
     border-radius: 10px;
     cursor: pointer;
+}
+
+.sendbtn2,
+.sendbtn3 {
+    width: 200px;
+    height: 30px;
+    font-family: sans-serif;
+    font-weight: bold;
+    letter-spacing: 2px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+.sendbtn1 {
+    width: 200px;
+    height: 30px;
+    font-family: sans-serif;
+    font-weight: bold;
+    letter-spacing: 2px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 40px;
+}
+
+.sendbtn1:hover {
+    background-color: red;
+}
+.sendbtn2:hover {
+    background-color: red;
+}
+.sendbtn3:hover {
+    background-color: lightblue;
 }
 
 .accepted_profiles {
